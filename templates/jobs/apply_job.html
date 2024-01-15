@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Apply for this job
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading">Apply for Job</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ field.name }} {{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                        <form id="job-main-form" method="post" action="{% url 'jobs:jobs-detail' job_id=job_id %}" class="job-add-form" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+    
+                            <!-- Resume -->
+                            <div class="form-group">
+                                <label for="{{ form.resume.id_for_label }}">Upload Resume:</label>
+                                {{ form.resume }}
+                                {% if form.resume.errors %}
+                                    <span class="text-danger">{{ form.resume.errors.0 }}</span>
+                                {% endif %}
+                            </div>
+    
+
+                             <!-- Cover Letter -->
+                             <div class="form-group">
+                                <label for="{{ form.cover_letter.id_for_label }}">Cover Letter:</label>
+                                {{ form.cover_letter }}
+                                {% if form.cover_letter.errors %}
+                                    <span class="text-danger">{{ form.cover_letter.errors.0 }}</span>
+                                {% endif %}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <hr>
+                                    <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-magic"></i>
+                                        APPLY
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %} 

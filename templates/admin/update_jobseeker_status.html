@@ -1,0 +1,35 @@
+<!-- {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Job Seekers
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading">List of Job Seekers</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h2>Update Job Seeker Status: {{ jobseeker_profile.user.username }}</h2>
+    <form method="post" id="updateStatusForm" action="{% url 'update-jobseeker-status' user_id=jobseeker.user.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" id="toggleStatusBtn" data-user-id="{{ jobseeker.user.id }}">
+            {% if jobseeker_profile.is_active %}
+                Deactivate
+            {% else %}
+                Activate
+            {% endif %}
+        </button>
+    </form>
+{% endblock %} -->

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Admin - Job Seekers List
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading">List of Job Seekers</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-box clearfix">
+                        <div class="table-responsive">
+                            <table class="table user-list">
+                                <thead>
+                                    <tr>
+                                        <th>Jobseeker</th>
+                                        <th>Username</th>
+                                        <th>Address</th>
+                                        <th>Email</th>
+                                        <th>Applied Jobs</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for jobseeker in jobseekers %}
+                                    <tr>
+                                        <td>
+                                            
+                                            {% if jobseeker.profile.profile_picture %}
+                                                <img src="{{ jobseeker.profile.profile_picture.url }}" alt="">
+                                            {% else %}
+                                                <img src="/media/jobseeker_profile_pictures/default.jpg" alt="">
+                                            {% endif %}
+                                         
+
+                                            <a href="#" class="user-link">{{jobseeker.user.fullname}}</a>
+                                            <span class="user-subhead">{{jobseeker.title}}</span>
+                                        </td>
+                                        <td>
+                                            {{jobseeker.user.username}}
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="label label-default">{{jobseeker.address}}</span>
+                                        </td>
+                                        <td>
+                                            <a href="#">{{jobseeker.user.email}}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'adminapp:applied-jobs' user_id=jobseeker.id%}">Applied Jobs</a>
+                                        </td>
+                                       
+                                        <td style="width: 20%;">
+                                            <a href="{% url 'adminapp:admin-jobseeker-profile-view' user_id=jobseeker.user_id %}" class="table-link">
+                                                <button type="button" class="btn btn-primary">View Profile</button>
+                                            </a>
+                                        </td>
+                                       
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <ul class="pagination pull-right">
+        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+    </ul>
+{% endblock %}

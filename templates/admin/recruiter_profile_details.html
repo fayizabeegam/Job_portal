@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Admin-Recruiter Profile View
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading">{{ recruiter_profile.user.username }} profile details</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="{{ profile.profile_picture_url }}" alt="{{ profile.user.username }}"/>
+                            <form method="post" enctype="multipart/form-data" action="">
+                                {% csrf_token %}
+                                {{ profile_pic_form.as_p }}
+                                <div class="file btn btn-lg btn-primary">
+                                    Change Photo
+                                    <input type="file" name="profile_pic"/>
+                                </div>
+                                <button type="submit">Save Changes</button>
+                                
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{recruiter_profile.user}}
+                                    </h5>
+                                    <h6>
+                                        {{recruiter_profile.designation}}
+                                    </h6>
+                                   
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{% url 'jobs:recruiter-profile-edit' %}" class="btn btn-outline-white-secondary">
+                            <i class="fa fa-magic"></i>Update
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                       
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>User</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.user.username}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.user.email}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Designation</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.designation}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.company_name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Description</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.company_description}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Location</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.company_location}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>industry</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.industry}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            
+                                            <div class="col-md-6">
+                                                <label>Established Year</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{recruiter_profile.established_year}}</p>
+                                            </div>
+                                        </div>
+                                        
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Post job
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading">Add a new Job position</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ field.name }} {{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <form id="job-main-form" method="post" action="" class="job-add-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="title">Job Title</label>
+                                <input id="title" name="title" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="text">Job Description</label>
+                                <textarea id="text" name="description" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <label for="text">Required Qualifications</label>
+                                <input id="text" name="required_qualifications" type="text" placeholder="e.g. BCA,MCA..."
+                                       class="form-control">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="text">Desired Qualifications</label>
+                                <input id="text" name="desired_qualifications" type="text" placeholder="e.g. BCA,MCA..."
+                                       class="form-control">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="text">Responsibilties</label>
+                                <textarea id="text" name="responsibilities" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <label for="application_deadline">Application Deadline</label>
+                                <input id="application_deadline" name="application_deadline" type="date" placeholder="select"
+                                       class="form-control">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="salary_range">Salary Range</label>
+                                <input id="salary_range" name="salary_range" type="text" placeholder=" e.g. 2 lpa"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <label for="location">Location</label>
+                                <input id="location" name="location" type="text" placeholder="e.g. Delhi"
+                                       class="form-control">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="type">Employment Type</label>
+                                <select id="type" name="employment_type" placeholder="Choose job type"
+                                        class="form-control select2">
+                                    <option value="1">Full time</option>
+                                    <option value="2">Part time</option>
+                                    <option value="3">Contract</option>
+                                    <option value="4">Internship</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            
+                            
+                            <div class="col-lg-6 form-group">
+                                <label for="employment_mode">Employment Mode</label>
+                                <select id="employment_mode" name="employment_mode" placeholder="Choose job type"
+                                        class="form-control select2">
+                                    <option value="1">On-site</option>
+                                    <option value="2">Remote</option>
+                                    <option value="3">Hybrid</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="category">Category</label>
+                                <select id="category" name="category" placeholder="Choose category"
+                                        class="form-control select2">
+                                    <option value="web-design">Web design</option>
+                                    <option value="graphic-design">Graphic design</option>
+                                    <option value="web-development">Software development</option>
+                                    <option value="human-resource">Human Resources</option>
+                                    <option value="support">Support</option>
+                                    <option value="android">Android</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="text">Company Benefits</label>
+                                <textarea id="text" name="company_benefits" rows="5" class="form-control"></textarea>
+                            </div>
+                    
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="text">How to applay?</label>
+                                <textarea id="text" name="how_to_apply" rows="5" class="form-control"></textarea>
+                            </div>
+                    
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <hr>
+                                <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-magic"></i>
+                                    Save and publish
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

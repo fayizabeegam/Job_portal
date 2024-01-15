@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Jobseeker-Edit Profile
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading">Edit Profile</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ field.name }} {{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <form id="job-main-form" method="post" action="" class="job-add-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="title">Title</label>
+                                <input id="title" name="title" type="text" class="form-control" value="{{form.initial.title}}" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="bio">Bio</label>
+                                <textarea id="bio" name="bio" rows="5" class="form-control">{{ form.initial.bio }}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <label for="education">Education</label>
+                                <input id="education" name="education" type="text" placeholder="e.g. BCA,MCA..."
+                                       class="form-control" value="{{form.initial.education}}">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="experience">Experience</label>
+                                <input id="experience" name="experience" type="text" placeholder="e.g. 1 year"
+                                       class="form-control" value="{{form.initial.experience}}">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="skills">Skills</label>
+                                <textarea id="skills" name="skills" rows="5" class="form-control">{{form.initial.skills}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <label for="phone_number">Mobile</label>
+                                <input id="phone_number" name="phone_number" type="text"
+                                       class="form-control" value="{{form.initial.phone_number}}">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="address">Address</label>
+                                <input id="address" name="address" type="text"
+                                       class="form-control" value="{{form.initial.address}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <label for="state">State</label>
+                                <input id="state" name="state" type="text" 
+                                       class="form-control" value="{{form.initial.state}}">
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="place">Place</label>
+                                <input id="place" name="place" type="text" 
+                                       class="form-control" value="{{form.initial.place}}">
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 form-group">
+                                <label for="{{ form.resume.id_for_label }}">Resume</label>
+                                {% if form.instance.resume %}
+                                     <a href="{{ form.instance.resume.url }}" target="_blank">{{ form.instance.resume.name }}</a>
+                                    <br>
+                                    <label for="{{ form.resume.id_for_label }}">Replace with new resume:</label>
+                                {% else %}
+                                    <label for="{{ form.resume.id_for_label }}">Upload resume:</label>
+                                {% endif %}
+                                {{ form.resume }}
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                <label for="profile_picture">Profile Picture</label>
+                                {% if form.instance.profile_picture %}
+                                    <a href="{{ form.instance.profile_picture.url }}" target="_blank">{{ form.instance.profile_picture.name }}</a>
+                                    <br>
+                                    <label for="{{ form.profile_picture.id_for_label }}">Replace with new pic:</label>
+                                {% else %}
+                                    <label for="{{ form.profile_picture.id_for_label }}">Upload resume:</label>
+                                {% endif %}
+                                {{ form.profile_picture}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <hr>
+                                <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-magic"></i>
+                                    Update Profile
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

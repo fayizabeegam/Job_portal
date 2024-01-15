@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Add Recruiter Profile
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap-select/css/bootstrap-select.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <section class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading">Add Profile</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger alert-dismissable">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    <strong>{{ field.name }} {{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <form id="job-main-form" method="post" action="" class="job-add-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="designation">Designation</label>
+                                <input id="designation" name="designation" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="company_name">Company Name</label>
+                                <input id="company_name" name="company_name" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="company_description">Company Description</label>
+                                <textarea id="company_description" name="company_description" rows="5" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="company_location">Company Location</label>
+                                <input id="company_location" name="company_location" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="industry">Industry </label>
+                                <input id="industry" name="industry" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="established_year">Established Year </label>
+                                <input id="established_year" name="established_year" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                <label for="profile_picture">Profile Picture</label>
+                                <input id="profile_picture" name="profile_picture" type="file" class="form-control">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <hr>
+                                <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-magic"></i>
+                                    Save Profile
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

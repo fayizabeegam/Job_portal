@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load is_already_applied %}
+{% block title %}
+    {{ job.title }} - Job Details
+{% endblock %}
+
+{% block content %}
+    <section class="bg-light-gray">
+        <div class="container">
+            <h1 class="heading">{{ job.title }}</h1>
+            <div class="job-detail-description">
+                <i class="fa fa-map-marker job__location"></i> {{ job.location }} | Posted {{ job.posted_at|timesince }} |
+                {% if job.employment_type == '1' %}
+                    <span class="badge featured-badge badge-success">Full time</span>
+                {% elif job.employment_type == '2' %}
+                    <span class="badge featured-badge badge-primary">Part time</span>
+                {% elif job.employment_type == '3' %}
+                    <span class="badge featured-badge badge-primary">Contract</span>
+                {% else %}
+                    <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
+                {% endif %}
+
+                {% if job.employment_mode == '1' %}
+                    <span class="badge featured-badge badge-success">On-site</span>
+               {% elif job.employment_mode == '2' %}
+                    <span class="badge featured-badge badge-primary">Remote</span>
+                {% else %}
+                    <span class="badge featured-badge badge-primary">Hybrid</span>
+               
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Title: {{ job.title }}</h3>
+                    <h5>Last date: {{ job.application_deadline|date }}</h5>
+                    <h5>Required Qualifications:{{job.required_qualifications}}</h5>
+                    <h5>Desired Qualifications:{{job.desired_qualifications}}</h5>
+                    <h5 class="text-info">Salary: {{ job.salary_range }}</h5>
+                    <blockquote class="blockquote">
+                        <p>{{ job.description }}</p>
+                    </blockquote>
+                    {% if request.user.role == 'jobseeker' %}
+                    <div class="job-detail__apply-bottom">
+                        {% if request.user.is_authenticated %}
+                            {% if job|is_already_applied:request.user %}
+                                <input type="button" class="btn btn-outline-white-primary" value="Already applied"/>
+                            {% else %}
+                                <form action="{% url 'jobs:apply-job' job.id %}" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="job" value="{{ job.id }}">
+                                    <input type="submit" class="btn btn-outline-white-primary" value="Apply for this job"/>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                </div>
+               
+                <!-- Add additional details as needed -->
+                <div class="col-lg-1"></div>
+                <div class="col-lg-3">
+                    <h6>Responsibilities:</h6>
+                    <ul>
+                        <li>{{job.responsibilities}}</li>
+                    </ul>
+                    <h6>Company_benefits:</h6>
+                    {{job.company_benefits}}
+
+                    <h6>How to apply:</h6>
+                    {{job.how_to_apply}}</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+{% endblock %}
