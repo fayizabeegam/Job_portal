@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block title %}
     Recruiter-Dashboard
 {% endblock %}
@@ -28,7 +29,7 @@
                     {% if jobs %}
                     <div class="table-responsive">
                         <table class="table table-striped table-hover table-client-dashboard">
-                            <thead class="thead-light"> <!-- Added a dark header for better visibility -->
+                            <thead class="thead-light">
                                 <tr>
                                     <th>Job title</th>
                                     <th>Date posted</th>
@@ -67,7 +68,7 @@
                         </table>
                     </div>
                     {% else %}
-                       <h4 class="text-center mt-4">No Jobs Posted Yet</h4> <!-- Centered the message and added top margin -->
+                       <h4 class="text-center mt-4">No Jobs Posted Yet</h4>
                     {% endif %}
                 </div>
             </div>
@@ -115,3 +116,20 @@
     </section>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

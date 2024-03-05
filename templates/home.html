@@ -75,27 +75,19 @@
                                 </div>
                             </div>
                         </form>
-                        {% else %}
-                        <h2 class="heading">Find <span class="accent">Employees</span></h2>
-                        <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
+                        {% elif request.user.role == 'recruiter' %}
+                        <h2 class="heading">Find <span class="accent">Jobseekers</span></h2>
+                        <form id="job-main-form" method="get" action="{% url 'jobs:search-jobseekers' %}" class="job-main-form">
                             <div class="controls">
                                 <div class="row align-items-center">
-                                    <div class="col-md-4">
+                                    <div class="col-md-9">
                                         <div class="form-group">
-                                            <label for="profession">Position</label>
-                                            <input type="text" id="profession" name="position"
-                                                   placeholder="Position" class="form-control">
+                                            <label for="title">Designation</label>
+                                            <input type="text" id="title" name="title"
+                                                   placeholder="Enter the designation" class="form-control">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="location">Location</label>
-                                            <input type="text" id="location" name="location"
-                                                   placeholder="Location" class="form-control">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <button type="submit"
                                                 class="btn btn-outline-white-primary job-main-form__button">
                                             <i class="fa fa-search"></i>
@@ -117,12 +109,13 @@
             <h3 class="heading">Featured jobs</h3>
             <div class="row featured align-items-stretch">
                 {% for job in jobs %}
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="box-image-text bg-visible full-height">
+                    <div class="col-lg-4 mb-5 ">
+                        <div class="box-image-text bg-visible full-height" style="background-color: rgb(95, 95, 244);">
+                        
                             <div class="top">
                                 <a href="#">
                                     <div class="image">
-                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid">
+                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid" style="height:auto;">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="logo">
@@ -130,9 +123,9 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="content">
-                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}">{{ job.title }}</a></h5>
-                                <p class="featured__details"><i class="fa fa-map-marker job__location"></i>
+                            <div class="content " >
+                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}" style="color: white;">{{ job.title }}</a></h5>
+                                <p class="featured__details" style="color: white;"><i class="fa fa-map-marker job__location" style="color: white;"></i>
                                     {{ job.location }}
                                     {% if job.employment_type == '1' %}
                                         <span class="badge featured-badge badge-success">Full time</span>
@@ -144,60 +137,25 @@
                                         <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
                                     {% endif %}
                                 </p>
-                                <p>{{ job.description }}</p>
+                                
                             </div>
+                    
+                            
                         </div>
                     </div>
                 {% endfor %}
             </div>
             {% elif request.user.role == 'recruiter' %}
-            <h3 class="heading">Jobseekers</h3>
-            <!-- <div class="row featured align-items-stretch">
-                {% for job in jobs %}
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="box-image-text bg-visible full-height">
-                            <div class="top">
-                                <a href="#">
-                                    <div class="image">
-                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid">
-                                    </div>
-                                    <div class="bg"></div>
-                                    <div class="logo">
-                                        <img src="{% static 'img/icon.jpg' %}" alt="" style="max-width: 80px;">
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="content">
-                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}">{{ job.title }}</a></h5>
-                                <p class="featured__details"><i class="fa fa-map-marker job__location"></i>
-                                    {{ job.location }}
-                                    {% if job.employment_type == '1' %}
-                                        <span class="badge featured-badge badge-success">Full time</span>
-                                    {% elif job.employment_type == '2' %}
-                                        <span class="badge featured-badge badge-primary">Part time</span>
-                                    {% elif job.employment_type == '3' %}
-                                        <span class="badge featured-badge badge-primary">Contract</span>
-                                    {% else %}
-                                        <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
-                                    {% endif %}
-                                </p>
-                                <p>{{ job.description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               {% endfor %} -->
-            <!-- </div> -->
-            {% else %}
             <h3 class="heading">Featured jobs</h3>
             <div class="row featured align-items-stretch">
                 {% for job in jobs %}
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="box-image-text bg-visible full-height">
+                    <div class="col-lg-4 mb-5 ">
+                        <div class="box-image-text bg-visible full-height" style="background-color: rgb(95, 95, 244);">
+                        
                             <div class="top">
                                 <a href="#">
                                     <div class="image">
-                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid">
+                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid" style="height:auto;">
                                     </div>
                                     <div class="bg"></div>
                                     <div class="logo">
@@ -205,9 +163,11 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="content">
-                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}">{{ job.title }}</a></h5>
-                                <p class="featured__details"><i class="fa fa-map-marker job__location"></i>
+                            <div class="content " >
+                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}" style="color: white;">{{ job.title }}</a></h5>
+                                {{job.recruiter.company_name}}
+                                <p class="featured__details" style="color: white;"><i class="fa fa-map-marker job__location" style="color: white;"></i>
+                                    
                                     {{ job.location }}
                                     {% if job.employment_type == '1' %}
                                         <span class="badge featured-badge badge-success">Full time</span>
@@ -219,13 +179,56 @@
                                         <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
                                     {% endif %}
                                 </p>
-                                <p>{{ job.description }}</p>
+                                
                             </div>
+                    
+                            
                         </div>
                     </div>
                 {% endfor %}
             </div>
-
+            {% else %}
+            <h3 class="heading">Featured jobs</h3>
+            <div class="row featured align-items-stretch">
+                {% for job in jobs %}
+                    <div class="col-lg-4 mb-5 ">
+                        <div class="box-image-text bg-visible full-height" style="background-color: rgb(95, 95, 244);">
+                        
+                            <div class="top">
+                                <a href="#">
+                                    <div class="image">
+                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid" style="height:auto;">
+                                    </div>
+                                    <div class="bg"></div>
+                                    <div class="logo">
+                                        <img src="{% static 'img/icon.jpg' %}" alt="" style="max-width: 80px;">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="content " >
+                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}" style="color: white;">{{ job.title }}</a></h5>
+                                {{job.recruiter.company_name}}
+                                <p class="featured__details" style="color: white;"><i class="fa fa-map-marker job__location" style="color: white;"></i>
+                                    
+                                    {{ job.location }}
+                                    {% if job.employment_type == '1' %}
+                                        <span class="badge featured-badge badge-success">Full time</span>
+                                    {% elif job.employment_type == '2' %}
+                                        <span class="badge featured-badge badge-primary">Part time</span>
+                                    {% elif job.employment_type == '3' %}
+                                        <span class="badge featured-badge badge-primary">Contract</span>
+                                    {% else %}
+                                        <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
+                                    {% endif %}
+                                </p>
+                                
+                            </div>
+                    
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
     </section>
@@ -257,14 +260,14 @@
                         <div class="col-10 col-md-3 col-lg-3 ml-auto">
                             <p>Posted {{ trending.posted_at|timesince }}</p>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-1">
+                        <!-- <div class="col-sm-12 col-md-2 col-lg-1">
                             <div class="job__star">
                                 <a href="#" data-toggle="tooltip" data-placement="top"
                                    title="Save to favourites" class="job__star__link">
                                     <i class="fa fa-star"></i>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             {% endfor %}
@@ -276,7 +279,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <p>Start searching for your new job now! </p>
-                    <p><a href="{% url 'jobs:jobs' %}" class="btn btn-outline-light">See our job offers </a></p>
+                    <p><a href="{% url 'jobs:jobs' %}" class="btn btn-outline-light">See available jobs </a></p>
                 </div>
             </div>
         </div>

@@ -27,7 +27,7 @@
                     <div class="col-md-4">
                         <div class="profile-img" id="profile-img-container">
                             {% if profile.profile_picture %}
-                                <img id="profile-img" src="{{ profile.profile_picture.url }}" alt="" style="width: 150px; height: 150px;"/>
+                                <img id="profile-img" src="{{ profile.profile_picture.url }}" alt="" style="width: 180px; height: 180px;"/>
                             {% else %}
                                 <img id="profile-img" src="/media/jobseeker_profile_pictures/default.jpg" alt="" style="width: 150px; height: 150px;"/>
                             {% endif %}
@@ -59,7 +59,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" style=" padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h5 style="color: blue;">About Me</h5>
                         <p>{{profile.bio}}</p>
                     </div>
                     <div class="col-md-8">

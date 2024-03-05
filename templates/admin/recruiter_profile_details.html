@@ -21,21 +21,18 @@
     </section>
     <section>
         <div class="container emp-profile">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="{{ profile.profile_picture_url }}" alt="{{ profile.user.username }}"/>
-                            <form method="post" enctype="multipart/form-data" action="">
-                                {% csrf_token %}
-                                {{ profile_pic_form.as_p }}
-                                <div class="file btn btn-lg btn-primary">
-                                    Change Photo
-                                    <input type="file" name="profile_pic"/>
-                                </div>
-                                <button type="submit">Save Changes</button>
-                                
-                            </form>
+                            <div class="profile-img" id="profile-img-container">
+                                {% if recruiter_profile.profile_picture %}
+                                    <img id="profile-img" src="{{ recruiter_profile.profile_picture.url }}" alt="" style="width: 180px; height: 180px;"/>
+                                {% else %}
+                                    <img id="profile-img" src="/media/recruiter_profile_pictures/default.jpg" alt="" style="width: 150px; height: 150px;"/>
+                                {% endif %}  
+                            </div> 
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -55,11 +52,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <a href="{% url 'jobs:recruiter-profile-edit' %}" class="btn btn-outline-white-secondary">
-                            <i class="fa fa-magic"></i>Update
-                        </a>
-                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -142,5 +135,7 @@
             </form>           
         </div>
     </section>
+
+    
 
 {% endblock %}

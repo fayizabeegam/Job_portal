@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import F
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import (
@@ -13,6 +15,7 @@ from django.views import View
 from jobs.decorators import user_is_recruiter
 from jobs.forms import *
 from jobs.models import *
+
 
 
 @method_decorator(login_required(login_url=reverse_lazy('accounts:login')), name='dispatch')
@@ -79,9 +82,10 @@ class DashboardView(ListView):
     model = JobListing
     template_name = 'jobs/recruiter/dashboard.html'
     context_object_name = 'jobs'
+    paginate_by = 5
 
     def get_queryset(self):
-        return self.model.objects.filter(recruiter_id=self.request.user.id)
+        return self.model.objects.filter(recruiter_id=self.request.user.id).order_by(F('posted_at').desc())
     
 
 class JobCreateView(CreateView):
@@ -166,7 +170,7 @@ class ApplicantPerJobView(ListView):
     model = JobApplication
     template_name = 'jobs/recruiter/applicants.html'
     context_object_name = 'applicants'
-    paginate_by = 1
+    paginate_by = 5
 
     def get_queryset(self):
         return JobApplication.objects.filter(job_listing_id=self.kwargs['job_id']).order_by('id')
@@ -186,9 +190,10 @@ class ApplicantsListView(ListView):
     model = JobApplication
     template_name = 'jobs/recruiter/all-applicants.html'
     context_object_name = 'applicants'
+    paginate_by = 5
 
     def get_queryset(self):
-        return self.model.objects.filter(job_listing__recruiter=self.request.user)
+        return self.model.objects.filter(job_listing__recruiter=self.request.user).order_by(F('applied_at').desc())
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -209,7 +214,7 @@ class ManageApplicatStatusView(View):
         # Check if the applicant is associated with the current user's job
         if applicant.job_listing.recruiter != request.user:
             messages.error(request, "You don't have permission to perform this action.")
-            return redirect('jobs:recruiter-all-applicants')
+            return redirect('jobs:recruiter-dashboard')
 
         # Update the status based on the action
         if action == 'accept':
@@ -222,4 +227,16 @@ class ManageApplicatStatusView(View):
             messages.error(request, "Invalid action.")
 
         applicant.save()
-        return redirect('jobs:recruiter-all-applicants')
+        return redirect('jobs:recruiter-dashboard')
+    
+
+class SearchJobSeekersView(ListView):
+    model = JobSeekerUpdateProfile
+    template_name = 'jobs/recruiter/recruiter_search.html'
+    context_object_name = 'jobseekers'
+    paginate_by = 5
+
+    def get_queryset(self):
+        title_query = self.request.GET.get('title', '')
+        query = Q(title__icontains=title_query)
+        return self.model.objects.filter(query)

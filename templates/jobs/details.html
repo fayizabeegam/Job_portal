@@ -37,15 +37,29 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <h3>Title: {{ job.title }}</h3>
-                    <h5>Last date: {{ job.application_deadline|date }}</h5>
-                    <h5>Required Qualifications:{{job.required_qualifications}}</h5>
-                    <h5>Desired Qualifications:{{job.desired_qualifications}}</h5>
-                    <h5 class="text-info">Salary: {{ job.salary_range }}</h5>
                     <blockquote class="blockquote">
+                        <h5>Job description</h5>
                         <p>{{ job.description }}</p>
                     </blockquote>
+                    <h5>Last date: {{ job.application_deadline|date }}</h5>
+                    <h5>Required Qualifications:{{ job.required_qualifications }}</h5>
+                    <h5>Desired Qualifications:{{ job.desired_qualifications }}</h5>
+                    <h5 class="text-info">Salary: {{ job.salary_range }}</h5>
+                    
+                    <h6>Responsibilities:</h6>
+                    <ul>
+                        <li>{{ job.responsibilities }}</li>
+                    </ul>
+                    <h6>Company Benefits:</h6>
+                    {{ job.company_benefits }}
+                </div>
+    
+                
+                <div class="col-lg-4">
+                    <h6>How to apply:</h6>
+                    {{ job.how_to_apply }}
                     {% if request.user.role == 'jobseeker' %}
+                    
                     <div class="job-detail__apply-bottom">
                         {% if request.user.is_authenticated %}
                             {% if job|is_already_applied:request.user %}
@@ -62,22 +76,7 @@
                     {% endif %}
                     
                 </div>
-               
-                <!-- Add additional details as needed -->
-                <div class="col-lg-1"></div>
-                <div class="col-lg-3">
-                    <h6>Responsibilities:</h6>
-                    <ul>
-                        <li>{{job.responsibilities}}</li>
-                    </ul>
-                    <h6>Company_benefits:</h6>
-                    {{job.company_benefits}}
-
-                    <h6>How to apply:</h6>
-                    {{job.how_to_apply}}</p>
-                </div>
-                
             </div>
         </div>
-    </section>
+        
 {% endblock %}

@@ -26,6 +26,7 @@ urlpatterns = [
     path('recruiter-profile-add/', AddRecruiterProfileView.as_view(), name='recruiter-profile-add'),
     path('recruiter-profile-view/', RecruiterProfileDetailView.as_view(), name='recruiter-profile-view'),
     path('recruiter-profile-edit/', RecruiterProfileEditView.as_view(), name='recruiter-profile-edit'),
+    path('search/jobseekers/', SearchJobSeekersView.as_view(), name='search-jobseekers'),
      
      
 

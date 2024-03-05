@@ -17,8 +17,8 @@ urlpatterns = [
 
     path('admin-jobseeker-profile-view/<int:user_id>/', admin_jobseeker_profile_view, name='admin-jobseeker-profile-view'),
     path('admin-recruiter-profile-view/<int:user_id>/', admin_recruiter_profile_view, name='admin-recruiter-profile-view'),
-
-    # path('update-jobseeker-status/<int:user_id>/', update_jobseeker_status, name='update-jobseeker-status'),
+    path('admin-recruiter-dashboard/<int:recruiter_id>/', AdminRecruiterDashboardView.as_view(), name='admin-recruiter-dashboard'),
+    
 
     path('applied-jobs/<int:user_id>/', AppliedJobsListView.as_view(), name='applied-jobs'),
 

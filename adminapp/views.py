@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
+from django.db.models import F
 from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from typing import Any
 from django.shortcuts import render
 from django.views import View
@@ -23,6 +24,7 @@ class AdminHomeView(View):
 def is_admin(user):
     return user.is_authenticated and user.is_staff
 
+
 class JobSeekerListView(ListView):
     """
         List all jobseekers
@@ -30,9 +32,11 @@ class JobSeekerListView(ListView):
     model = JobSeekerUpdateProfile
     template_name = 'admin/jobseeker_list.html'
     context_object_name = 'jobseekers'
+    paginate_by = 5
 
     def get_queryset(self):
-        return JobSeekerUpdateProfile.objects.all()
+        return JobSeekerUpdateProfile.objects.all().order_by('id')
+        # return User.objects.filter(role='jobseeker').order_by('id')
     
 
 @user_passes_test(is_admin, login_url=reverse_lazy('accounts:login'))
@@ -64,22 +68,19 @@ def admin_jobseeker_profile_view(request, user_id ):
 #     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
-
-class AppliedJobsListView(View):
+class AppliedJobsListView(ListView):
     """
-      Applied jobs of each jobseeker
+        Admin can see the applied jobs of jobseeker
     """
-    template_name = 'admin/jobseeker_applied_jobs.html'
-    def get(self, request, *args, **kwargs):
-        # Get the job seeker ID from the URL parameters
-        job_seeker_id = self.kwargs.get('user_id')
+    model = JobApplication
+    template_name = 'jobs/applied_jobs_list.html'
+    context_object_name = 'applied_jobs'
+    paginate_by = 5  # Set the number of items per page
 
+    def get_queryset(self):
         # Get applied jobs for the specified job seeker
-        applied_jobs = JobApplication.objects.filter(job_seeker_id=job_seeker_id).distinct()
-
-        context = {'applied_jobs': applied_jobs}
-        return render(request, self.template_name, context)
-
+        job_seeker_id = self.kwargs.get('user_id')
+        return JobApplication.objects.filter(job_seeker_id=job_seeker_id).distinct()
 
 
 class RecruitersListView(ListView):
@@ -89,6 +90,7 @@ class RecruitersListView(ListView):
     model = RecruiterUpdateProfile
     template_name = 'admin/recruiter_list.html'
     context_object_name = 'recruiters'
+    paginate_by = 5
 
     def get_queryset(self):
         return RecruiterUpdateProfile.objects.all()
@@ -101,3 +103,19 @@ def admin_recruiter_profile_view(request, user_id ):
     """
     recruiter_profile = get_object_or_404(RecruiterUpdateProfile, user_id=user_id)
     return render(request, 'admin/recruiter_profile_details.html', {'recruiter_profile': recruiter_profile})
+
+
+class AdminRecruiterDashboardView(ListView):
+    model = JobListing
+    template_name = 'admin/admin_recruiter_dashboard.html'
+    context_object_name = 'jobs'
+    paginate_by = 5
+
+    def get_queryset(self):
+        # Retrieve the recruiter ID from the URL parameters
+        recruiter_id = self.kwargs.get('recruiter_id')
+        recruiter_user = get_object_or_404(User, id=recruiter_id)
+        # Filter jobs based on the recruiter ID
+        return self.model.objects.filter(recruiter=recruiter_user).order_by(F('posted_at').desc())
+
+    

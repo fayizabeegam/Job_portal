@@ -33,11 +33,11 @@
                             {% endfor %}
                         {% endfor %}
                     {% endif %}
-                        <form id="job-main-form" method="post" action="{% url 'jobs:jobs-detail' job_id=job_id %}" class="job-add-form" enctype="multipart/form-data">
+                        <form id="job-main-form" method="post" action="{% url 'jobs:apply-job' job_id=job_id %}" class="job-add-form" enctype="multipart/form-data">
                             {% csrf_token %}
                             
     
-                            <!-- Resume -->
+                            
                             <div class="form-group">
                                 <label for="{{ form.resume.id_for_label }}">Upload Resume:</label>
                                 {{ form.resume }}
@@ -47,7 +47,7 @@
                             </div>
     
 
-                             <!-- Cover Letter -->
+                             
                              <div class="form-group">
                                 <label for="{{ form.cover_letter.id_for_label }}">Cover Letter:</label>
                                 {{ form.cover_letter }}
@@ -71,3 +71,47 @@
         </div>
     </section>
 {% endblock %} 
+
+<!-- 
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Apply for {{ job.title }}
+{% endblock %}
+
+{% block content %}
+    <section class="bg-light-gray">
+        <div class="container">
+            <h1 class="heading">Apply for {{ job.title }}</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Display job details -->
+                </div>
+
+                <div class="col-lg-4">
+                    <h6>Your Details:</h6>
+                    <p>Name: {{ user_profile.user.get_full_name }}</p>
+                    <p>Email: {{ user_profile.user.email }}</p>
+                    <p>Mobile: {{ user_profile.phone_number }}</p>
+                    <p>Place: {{ user_profile.place }}</p>
+                    <p>State: {{ user_profile.state }}</p>
+                    <p>Education: {{ user_profile.education }}</p>
+                    <p>Experience: {{ user_profile.experience }}</p>
+
+                    <h6>Apply for this job:</h6>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" class="btn btn-outline-white-primary" value="Apply"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %} -->

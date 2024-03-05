@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.http import Http404
 from django.views import View
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from jobs.decorators import user_is_jobseeker
@@ -16,14 +16,19 @@ class HomeView(ListView):
     model = JobListing
     template_name = 'home.html'
     context_object_name = 'jobs'
-
+    ordering = ['-posted_at']
+    
     def get_queryset(self):
-        return self.model.objects.all()[:6]
-
+        queryset = self.model.objects.order_by(*self.ordering)
+        return queryset[:6]
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['trendings'] = self.model.objects.filter(posted_at__month=timezone.now().month)[:3]
+        trendings = self.model.objects.filter(posted_at__month=timezone.now().month).order_by(
+                                                                             '-posted_at')[:3]
+        context['trendings'] = trendings
         return context
+        
 
 
 class SearchView(ListView):
@@ -38,7 +43,7 @@ class SearchView(ListView):
         location_query = self.request.GET.get('location', '')
         title_query = self.request.GET.get('title', '')
         query = Q(location__icontains=location_query) & Q(title__icontains=title_query)
-        return self.model.objects.filter(query)
+        return self.model.objects.filter(query)  
                                          
 
 class JobListView(ListView):
@@ -49,6 +54,10 @@ class JobListView(ListView):
     template_name = 'jobs/jobs.html'
     context_object_name = 'jobs'
     paginate_by = 5
+    ordering = ['-posted_at']  
+
+    def get_queryset(self):
+        return super().get_queryset()
 
 
 class JobDetailsView(DetailView):
@@ -73,60 +82,34 @@ class JobDetailsView(DetailView):
         return self.render_to_response(context)
     
 
-
-# @method_decorator(login_required(login_url=reverse_lazy('accounts:login')), name='dispatch')
-# @method_decorator(user_is_jobseeker, name='dispatch')
-# class ApplyJobView(View):
-#     """
-#        jobseekers can apply the jobs
-#     """
-#     def get(self, request, job_id):
-#         form = ApplyJobForm(job_id=job_id, user=request.user)
-#         return render(request, 'jobs/apply_job.html', {'form': form, 'job_id': job_id})
-
-#     def post(self, request, job_id):
-#         form = ApplyJobForm(request.POST, request.FILES, job_id=job_id, user=request.user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('jobs:jobs-detail', id=job_id)
-#         else:
-#             return render(request, 'jobs/apply_job.html', {'form': form, 'job_id': job_id})
-
-class ApplyJobView(DetailView, View):
+@method_decorator(login_required(login_url=reverse_lazy('accounts:login')), name='dispatch')
+@method_decorator(user_is_jobseeker, name='dispatch')
+class ApplyJobView(View):
     """
-    Jobseekers can apply to jobs
+       jobseekers can apply the jobs
     """
-    model = JobListing
-    template_name = 'jobs/apply_job.html'
-    context_object_name = 'job'
-    pk_url_kwarg = 'job_id'
+    def get(self, request, job_id):
+        form = ApplyJobForm(job_id=job_id, user=request.user)
+        return render(request, 'jobs/apply_job.html', {'form': form, 'job_id': job_id})
 
-    @method_decorator(login_required(login_url=reverse_lazy('accounts:login')))
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        form = ApplyJobForm(job_id=self.kwargs.get('job_id'), user=request.user)
-        return render(request, self.template_name, {'form': form, 'job_id': kwargs['job_id']})
-
-    def post(self, request, *args, **kwargs):
-        form = ApplyJobForm(request.POST, request.FILES, job_id=self.kwargs.get('job_id'), user=request.user)
+    def post(self, request, job_id):
+        form = ApplyJobForm(request.POST, request.FILES, job_id=job_id, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect('jobs:jobs-detail', id=self.kwargs['job_id'])
+            return redirect('jobs:jobs-detail', id=job_id)
         else:
-            return render(request, self.template_name, {'form': form, 'job_id': kwargs['job_id']})
+            return render(request, 'jobs/apply_job.html', {'form': form, 'job_id': job_id})
+
+
+
 
 @method_decorator(login_required(login_url=reverse_lazy('accounts:login')), name='dispatch')
-class AppliedJobsListView(View):
-    """
-       jobseekers can see the their applied jobs
-    """
-
+class AppliedJobsListView(ListView):
+    model = JobApplication
     template_name = 'jobs/applied_jobs_list.html'
-    def get(self, request):
-        # Get applied jobs for the current user
-        applied_jobs = JobApplication.objects.filter(job_seeker=request.user).distinct()
+    context_object_name = 'applied_jobs'
+    paginate_by = 5  
 
-        context = {'applied_jobs': applied_jobs}
-        return render(request, self.template_name, context)
+    def get_queryset(self):
+        # Get applied jobs for the current user
+        return JobApplication.objects.filter(job_seeker=self.request.user).distinct()

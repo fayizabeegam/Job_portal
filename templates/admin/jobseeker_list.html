@@ -28,7 +28,7 @@
                     <div class="main-box clearfix">
                         <div class="table-responsive">
                             <table class="table user-list">
-                                <thead>
+                                <thead class="thead-light">
                                     <tr>
                                         <th>Jobseeker</th>
                                         <th>Username</th>
@@ -42,6 +42,7 @@
                                     {% for jobseeker in jobseekers %}
                                     <tr>
                                         <td>
+                                        
                                             
                                             {% if jobseeker.profile.profile_picture %}
                                                 <img src="{{ jobseeker.profile.profile_picture.url }}" alt="">
@@ -65,11 +66,21 @@
                                         <td>
                                             <a href="{% url 'adminapp:applied-jobs' user_id=jobseeker.id%}">Applied Jobs</a>
                                         </td>
+                                        
                                        
                                         <td style="width: 20%;">
-                                            <a href="{% url 'adminapp:admin-jobseeker-profile-view' user_id=jobseeker.user_id %}" class="table-link">
+                                            {% if jobseeker.user.id %}
+                                                <a href="{% url 'adminapp:admin-jobseeker-profile-view' user_id=jobseeker.user.id %}" 
+                                                class="table-link">
+                                                    <button type="button" class="btn btn-sm" 
+                                                    style="background-color: rgb(29, 29, 225); color: white;">View Profile</button>
+                                                </a>
+                                            {% else %}
+                                                <p>User ID not available</p>
+                                            {% endif %}
+                                            <!-- <a href="{% url 'adminapp:admin-jobseeker-profile-view' user_id=jobseeker.user.id %}" class="table-link">
                                                 <button type="button" class="btn btn-primary">View Profile</button>
-                                            </a>
+                                            </a> -->
                                         </td>
                                        
                                     </tr>
@@ -81,15 +92,47 @@
                 </div>
             </div>
         </div>
+        {% if is_paginated %}
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4 mb-4">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                    class="page-link">&laquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link">&laquo;</a>
+                                </li>
+                            {% endif %}
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active">
+                                        <a class="page-link">{{ i }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                        <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link">&raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        {% endif %}
     </section>
     
-    <ul class="pagination pull-right">
-        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-    </ul>
+    
 {% endblock %}

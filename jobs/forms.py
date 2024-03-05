@@ -151,7 +151,8 @@ class JobPostingForm(forms.ModelForm):
         if commit:
             job.save()
         return job
-    
+
+
 
 class ApplyJobForm(forms.ModelForm):
     class Meta:

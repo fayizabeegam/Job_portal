@@ -45,11 +45,18 @@ class JobseekerRegistrationForm(UserCreationForm):
         fields = [ 'username','fullname', 'email', 'password1', 'password2']
 
     def save(self, commit=True):
-        user = super(UserCreationForm, self).save(commit=False)
+        user = super(JobseekerRegistrationForm, self).save(commit=False)
         user.role = "jobseeker"
         if commit:
             user.save()
         return user
+
+    # def save(self, commit=True):
+    #     user = super(UserCreationForm, self).save(commit=False)
+    #     user.role = "jobseeker"
+    #     if commit:
+    #         user.save()
+    #     return user
 
 
 class RecruiterRegistrationForm(UserCreationForm):

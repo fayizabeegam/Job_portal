@@ -277,3 +277,66 @@
 .table-stats .table-line-plus .status-social-icon {
 	color: #a75d54;
 }
+
+/**************************applied job list***************/
+/* Applied Jobs List Styles */
+.applied-jobs-list {
+    margin-bottom: 20px;
+}
+
+.applied-job-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Pagination Styles */
+.pagination {
+    margin-top: 20px;
+}
+
+.step-links {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.step-links a {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.current {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Optionally style badge colors */
+.badge-success {
+    background-color: #5cb85c;
+    color: #fff;
+}
+
+.badge-danger {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.badge-warning {
+    background-color: #f0ad4e;
+    color: #fff;
+}
+
+/********************recruiter dashboard*******/
+.custom-btn {
+    width: 100px;  
+    height: 40px;  
+}
