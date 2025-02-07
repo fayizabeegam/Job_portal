@@ -56,12 +56,19 @@ class RecruiterUpdateProfile(models.Model):
         return self.company_name
     
 
+class JobCategory(models.Model):
+    category = models.CharField(max_length=100,unique=True)
+    icon_image = models.ImageField(upload_to='category_images/', blank=True, null=True)
+
+    def __str__(self):
+        return self.category
+
 class JobListing(models.Model):
     recruiter = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
     location = models.CharField(max_length=100)
-    category = models.CharField(max_length=100,default='default_category')
+    category = models.ForeignKey(JobCategory, on_delete=models.SET_NULL, null=True, related_name="jobs")
     required_qualifications = models.TextField()
     desired_qualifications = models.TextField(blank=True, null=True)
     responsibilities = models.TextField()

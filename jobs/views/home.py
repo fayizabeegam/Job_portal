@@ -46,6 +46,12 @@ class SearchView(ListView):
         return self.model.objects.filter(query)  
                                          
 
+# class JobCategoryListView(ListView):
+#     model = JobCategory
+#     template_name = 'jobs/job_categories.html'
+#     context_object_name = 'categories'
+
+    
 class JobListView(ListView):
     """
        List the posted jobs

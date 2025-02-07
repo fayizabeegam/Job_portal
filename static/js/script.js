@@ -1,3 +1,4 @@
+ // ***********************************************************************
 document.getElementById('deleteJobBtn').addEventListener('click', function() {
     var jobId = this.getAttribute('data-job-id');
     // Show a confirmation dialog
@@ -67,29 +68,3 @@ function deleteJob(jobId) {
 });
 
 /*********************************************************************** */
-
-
-
-
-
-
-
-
-
-//  $(document).ready(function () {
-//     $('#updateStatusForm').on('submit', function (e) {
-//         e.preventDefault();
-
-//         $.ajax({
-//             type: 'POST',
-//             url: $(this).data('status-url'),
-//             data: $(this).serialize(),
-//             success: function (data) {
-//                 alert('Status updated successfully!');
-//             },
-//             error: function (error) {
-//                 alert('Error updating status.');
-//             }
-//         });
-//     });
-// });

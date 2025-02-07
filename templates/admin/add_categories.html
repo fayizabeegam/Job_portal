@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Add Categories
+{% endblock %}
+
+{% block content %}
+<section class="py-5 px-5 py-xl-8 px-xl-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                <h2 class="mb-4 display-5 text-center">Job Categories</h2>
+                <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+            </div>
+        </div>
+
+        <div class="text-center mb-4">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                Add Category
+            </button>
+        </div>
+
+        <div class="container overflow-hidden d-flex flex-column align-items-center text-center">
+            <div class="row gy-5 gx-md-5 justify-content-center">
+                {% for category in categories %}
+                <div class="col-md-3 mb-4">
+                    <div class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                        <div class="dropdown">
+                            {% if category.icon_image %}
+                                <img src="{{ category.icon_image.url }}" alt="{{ category.category }}" width="80" height="80" class="icon-circle icon-circle-lg bg-pastel-primary text-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                            {% else %}
+                                <img src="{% static 'img/default_job.jpg' %}" alt="{{ category.category }}" width="80" height="80" class="icon-circle icon-circle-lg bg-pastel-primary text-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                            {% endif %}
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ category.id }}">
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editCategoryModal{{ category.id }}">Edit</a>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal{{ category.id }}">Delete</a>
+                            </div>
+                        </div>
+                        <span class="text-dark mt-3">
+                            {{ category.category }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="editCategoryModal{{ category.id }}" tabindex="-1" aria-labelledby="editCategoryModalLabel{{ category.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editCategoryModalLabel{{ category.id }}">Edit Category</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{% url 'adminapp:edit-category' category.id %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="categoryName{{ category.id }}" class="form-label">Category Name</label>
+                                        <input type="text" class="form-control" id="categoryName{{ category.id }}" name="category" value="{{ category.category }}" >
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="categoryImage{{ category.id }}" class="form-label">Category Image</label>
+                                        <input type="file" class="form-control" id="categoryImage{{ category.id }}" name="icon_image">
+                                        {% if category.icon_image %}
+                                            <img src="{{ category.icon_image.url }}" alt="{{ category.category }}" width="50" height="50" class="mt-2">  {% endif %}
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="deleteCategoryModal{{ category.id }}" ...>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" ...>Confirm Delete</h5>
+                                <button type="button" class="btn-close" ...></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete ...?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <form method="post" action="{% url 'adminapp:delete-category' category.id %}">  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </div> </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">Add New Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm" method="post" action="{% url 'adminapp:add-category' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="categoryName" name="category" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryImage" class="form-label">Category Image</label>
+                        <input type="file" class="form-control" id="categoryImage" name="icon_image">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Save Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

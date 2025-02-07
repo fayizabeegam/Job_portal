@@ -1,14 +1,16 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
 from django.db.models import F
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,redirect
 from django.http import HttpResponse, JsonResponse
 from typing import Any
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import*
+from django.views.generic.list import MultipleObjectMixin
 from jobs.models import *
 from .forms import *
+from django.contrib import messages
 
 
 class AdminHomeView(View):
@@ -23,6 +25,69 @@ class AdminHomeView(View):
 
 def is_admin(user):
     return user.is_authenticated and user.is_staff
+
+
+class AddCategories(CreateView):
+    model = JobCategory
+    form_class = AddCategoryForm
+    template_name = "admin/add_categories.html"
+    context_object_name = 'categories'
+    success_url = reverse_lazy('adminapp:add-category')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = JobCategory.objects.all()  # Add categories to context
+        return context
+
+    def form_valid(self, form):
+        # Save the category
+        messages.success(self.request, 'Category added successfully!')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        # Handle errors
+        messages.error(self.request, 'Error adding category.')
+        return super().form_invalid(form)
+
+class EditCategory(UpdateView):
+    model = JobCategory
+    form_class = AddCategoryForm
+    template_name = "admin/add_categories.html"
+    success_url = reverse_lazy('adminapp:add-category')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = JobCategory.objects.all()
+        context['editing'] = True  # Flag for editing mode
+        return context
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Category updated successfully!')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Error updating category.')
+        return super().form_invalid(form)
+
+
+class DeleteCategory(DeleteView):
+    model = JobCategory
+    template_name = "admin/add_categories.html"  # Create a delete confirmation template
+    success_url = reverse_lazy('adminapp:add-category')
+
+    def post(self, request, *args, **kwargs):
+        category = self.get_object()
+
+        # Delete associated job listings first
+        JobListing.objects.filter(category=category).delete()
+        messages.success(self.request, 'Category and associated jobs deleted successfully!')
+
+        # Now, call the parent class's post method to handle the actual deletion
+        return super().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        return redirect('adminapp:add-category') # or a dedicated delete confirmation page
+
 
 
 class JobSeekerListView(ListView):

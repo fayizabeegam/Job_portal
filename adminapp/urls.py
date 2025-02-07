@@ -5,6 +5,7 @@ from jobs.views.jobseeker import *
 from jobs.views.recruiter import *
 from jobs.views.home import *
 from .views import *
+from . import views
 
 app_name = "adminapp"
 
@@ -12,6 +13,11 @@ urlpatterns = [
 
     path('admin-home/', AdminHomeView.as_view(), name='admin-home'),
 
+    path('add-categories/', AddCategories.as_view(), name='add-category'),
+    path('edit-category/<int:pk>/', views.EditCategory.as_view(), name='edit-category'), 
+    path('delete-category/<int:pk>/', views.DeleteCategory.as_view(), name='delete-category'), 
+
+    
     path('jobseekers-list/', JobSeekerListView.as_view(), name='admin-jobseeker-list'),
     path('recruiters-list/',RecruitersListView.as_view(),name='admin-recruiter-list'),
 
