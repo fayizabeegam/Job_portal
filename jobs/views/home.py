@@ -13,22 +13,48 @@ from jobs.models import *
 
 
 class HomeView(ListView):
-    model = JobListing
+    # model = JobListing
+    # template_name = 'home.html'
+    # context_object_name = 'jobs'
+    # ordering = ['-posted_at']
+    
+    # def get_queryset(self):
+    #     queryset = self.model.objects.order_by(*self.ordering)
+    #     return queryset[:6]
+    
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     trendings = self.model.objects.filter(posted_at__month=timezone.now().month).order_by(
+    #                                                                          '-posted_at')[:3]
+    #     context['trendings'] = trendings
+    #     return context
+    model = JobCategory
     template_name = 'home.html'
-    context_object_name = 'jobs'
-    ordering = ['-posted_at']
-    
-    def get_queryset(self):
-        queryset = self.model.objects.order_by(*self.ordering)
-        return queryset[:6]
-    
+    context_object_name = 'categories'
+    ordering = ['category']  # Sort categories alphabetically
+    paginate_by = 8  # Show 5 categories per page
+
     def get_context_data(self, **kwargs):
+        """Add categories and trending categories if needed."""
         context = super().get_context_data(**kwargs)
-        trendings = self.model.objects.filter(posted_at__month=timezone.now().month).order_by(
-                                                                             '-posted_at')[:3]
-        context['trendings'] = trendings
-        return context
         
+        # Get first 5 categories for home page
+        context['home_categories'] = JobCategory.objects.order_by(*self.ordering)[:5]
+        
+        return context
+
+class MoreCategoriesView(ListView):
+    model = JobCategory
+    template_name = 'admin:add_categories.html'  
+    context_object_name = 'categories'
+    ordering = ['category']
+    paginate_by = 10  # Show 10 categories per page
+
+    def dispatch(self, request, *args, **kwargs):
+        """Redirect superusers to the admin category page."""
+        if request.user.is_superuser:
+            return redirect('adminapp:add-category')  # Redirect to admin category management
+        return super().dispatch(request, *args, **kwargs)
 
 
 class SearchView(ListView):
@@ -46,12 +72,6 @@ class SearchView(ListView):
         return self.model.objects.filter(query)  
                                          
 
-# class JobCategoryListView(ListView):
-#     model = JobCategory
-#     template_name = 'jobs/job_categories.html'
-#     context_object_name = 'categories'
-
-    
 class JobListView(ListView):
     """
        List the posted jobs

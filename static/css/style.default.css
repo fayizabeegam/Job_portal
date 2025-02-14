@@ -349,7 +349,7 @@ strong {
 .navbar {
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    background: #6051e8;
+    background: #f8f9fa;
     padding-top: 0 !important;
     padding-bottom: 0 !important
 }
@@ -1399,7 +1399,8 @@ ul.dropdown-menu li a:hover {
 
 .job-form-section {
     padding: 80px 0;
-    background: #fafafa
+    background: #2417d1; 
+    min-height: 90vh;
 }
 
 .job-form-section .job-main-form {
@@ -1420,10 +1421,6 @@ ul.dropdown-menu li a:hover {
     margin-bottom: 0
 }
 
-.job-form-section.job-form-section--image {
-    background: center center url("../img/about.jpg") no-repeat;
-    background-size: cover
-}
 
 .job-main-form__button {
     margin-top: 15px;
@@ -1431,12 +1428,6 @@ ul.dropdown-menu li a:hover {
     width: 100%
 }
 
-.job-form-box {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 40px;
-    margin-top: 40px;
-    margin-bottom: 40px
-}
 
 .job-listing {
     border: solid 1px #dee2e6;
@@ -1745,7 +1736,8 @@ ul.dropdown-menu li a:hover {
 }
 
 .navbar {
-    padding: .5rem 1rem
+    padding: .4rem 1rem
+    
 }
 
 .navbar-brand {

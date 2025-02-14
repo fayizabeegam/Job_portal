@@ -38,198 +38,78 @@
         </div>
     </div>
     <!-- *** LOGIN MODAL END ***-->
-    <section class="job-form-section job-form-section--image">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    
-                    <div class="job-form-box">
-                        {% if request.user.role == 'jobseeker' %}
-                        <h2 class="heading">Find a <span class="accent">job</span> you will
-                            <span class="accent">love</span>.
-                        </h2>
-                        <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
-                            <div class="controls">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="profession">Position</label>
-                                            <input type="text" id="profession" name="position"
-                                                   placeholder="Position" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="location">Location</label>
-                                            <input type="text" id="location" name="location"
-                                                   placeholder="Location" class="form-control">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-2">
-                                        <button type="submit"
-                                                class="btn btn-outline-white-primary job-main-form__button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
+    <section class="job-form-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Left: Search Form -->
+            <div class="col-lg-8">
+                <h1 class="section-title">Discover Your Next Opportunity</h1>
+                <p class="section-subtitle">Search for jobs that match your skills and preferences</p>
+                <div class="job-form-box">
+                    <h2 class="heading">Find a <span class="accent">job</span> you will
+                        <span class="accent">love</span>.
+                    </h2>
+                    <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
+                        <div class="controls">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="profession">Position</label>
+                                        <input type="text" id="profession" name="position"
+                                               placeholder="Position" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                        </form>
-                        {% elif request.user.role == 'recruiter' %}
-                        <h2 class="heading">Find <span class="accent">Jobseekers</span></h2>
-                        <form id="job-main-form" method="get" action="{% url 'jobs:search-jobseekers' %}" class="job-main-form">
-                            <div class="controls">
-                                <div class="row align-items-center">
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <label for="title">Designation</label>
-                                            <input type="text" id="title" name="title"
-                                                   placeholder="Enter the designation" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button type="submit"
-                                                class="btn btn-outline-white-primary job-main-form__button">
-                                            <i class="fa fa-search"></i>
-                                        </button>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="location">Location</label>
+                                        <input type="text" id="location" name="location"
+                                               placeholder="Location" class="form-control">
                                     </div>
                                 </div>
+                                <div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-outline-white-primary job-main-form__button">
+                                        <i class="fa fa-search"></i> Search
+                                    </button>
+                                </div>
                             </div>
-                        </form>
-                        {% endif %}
-                    </div>
-                    
+                        </div>
+                    </form>
                 </div>
             </div>
+
+            <!-- Right: Image -->
+            <div class="col-lg-4 text-center">
+                <img src="{% static 'img/manlap1.png' %}" alt="Job Search" class="img-fluid">
+            </div>
         </div>
+    </div>
     </section>
+
     <section class="bg-light-gray">
         <div class="container">
-            {% if request.user.role == 'jobseeker' %}
-            <h3 class="heading">Featured jobs</h3>
-            <div class="row featured align-items-stretch">
-                {% for job in jobs %}
-                    <div class="col-lg-4 mb-5 ">
-                        <div class="box-image-text bg-visible full-height" style="background-color: rgb(95, 95, 244);">
-                        
-                            <div class="top">
-                                <a href="#">
-                                    <div class="image">
-                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid" style="height:auto;">
-                                    </div>
-                                    <div class="bg"></div>
-                                    <div class="logo">
-                                        <img src="{% static 'img/icon.jpg' %}" alt="" style="max-width: 80px;">
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="content " >
-                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}" style="color: white;">{{ job.title }}</a></h5>
-                                <p class="featured__details" style="color: white;"><i class="fa fa-map-marker job__location" style="color: white;"></i>
-                                    {{ job.location }}
-                                    {% if job.employment_type == '1' %}
-                                        <span class="badge featured-badge badge-success">Full time</span>
-                                    {% elif job.employment_type == '2' %}
-                                        <span class="badge featured-badge badge-primary">Part time</span>
-                                    {% elif job.employment_type == '3' %}
-                                        <span class="badge featured-badge badge-primary">Contract</span>
-                                    {% else %}
-                                        <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
-                                    {% endif %}
-                                </p>
-                                
-                            </div>
-                    
-                            
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            {% elif request.user.role == 'recruiter' %}
-            <h3 class="heading">Featured jobs</h3>
-            <div class="row featured align-items-stretch">
-                {% for job in jobs %}
-                    <div class="col-lg-4 mb-5 ">
-                        <div class="box-image-text bg-visible full-height" style="background-color: rgb(95, 95, 244);">
-                        
-                            <div class="top">
-                                <a href="#">
-                                    <div class="image">
-                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid" style="height:auto;">
-                                    </div>
-                                    <div class="bg"></div>
-                                    <div class="logo">
-                                        <img src="{% static 'img/icon.jpg' %}" alt="" style="max-width: 80px;">
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="content " >
-                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}" style="color: white;">{{ job.title }}</a></h5>
-                                {{job.recruiter.company_name}}
-                                <p class="featured__details" style="color: white;"><i class="fa fa-map-marker job__location" style="color: white;"></i>
-                                    
-                                    {{ job.location }}
-                                    {% if job.employment_type == '1' %}
-                                        <span class="badge featured-badge badge-success">Full time</span>
-                                    {% elif job.employment_type == '2' %}
-                                        <span class="badge featured-badge badge-primary">Part time</span>
-                                    {% elif job.employment_type == '3' %}
-                                        <span class="badge featured-badge badge-primary">Contract</span>
-                                    {% else %}
-                                        <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
-                                    {% endif %}
-                                </p>
-                                
-                            </div>
-                    
-                            
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-            {% else %}
             <h3 class="heading">Job Categories</h3>
             <div class="row featured align-items-stretch">
                 {% for category in categories %}
-                    <div class="col-lg-4 mb-5 ">
-                        <div class="box-image-text bg-visible full-height" style="background-color: rgb(95, 95, 244);">
-                        
-                            <div class="top">
-                                <a href="#">
-                                    <div class="image">
-                                        <img src="{% static 'img/jobs.jpg' %}" alt="" class="img-fluid" style="height:auto;">
-                                    </div>
-                                    <div class="bg"></div>
-                                    <div class="logo">
-                                        <img src="{% static 'img/icon.jpg' %}" alt="" style="max-width: 80px;">
-                                    </div>
-                                </a>
+                    <div class="col-md-3 mb-4">
+                        <div class="card align-items-center text-decoration-none border-0 hover-lift-light py-4">
+                            <div class="dropdown">
+                                {% if category.icon_image %}
+                                    <img src="{{ category.icon_image.url }}" alt="{{ category.category }}" width="80" height="80" class="icon-circle icon-circle-lg bg-pastel-primary text-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                                {% else %}
+                                    <img src="{% static 'img/default_job.jpg' %}" alt="{{ category.category }}" width="80" height="80" class="icon-circle icon-circle-lg bg-pastel-primary text-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                                {% endif %}
                             </div>
-                            <div class="content " >
-                                <h5><a href="{% url 'jobs:jobs-detail' job.id %}" style="color: white;">{{ job.title }}</a></h5>
-                                {{job.recruiter.company_name}}
-                                <p class="featured__details" style="color: white;"><i class="fa fa-map-marker job__location" style="color: white;"></i>
-                                    
-                                    {{ job.location }}
-                                    {% if job.employment_type == '1' %}
-                                        <span class="badge featured-badge badge-success">Full time</span>
-                                    {% elif job.employment_type == '2' %}
-                                        <span class="badge featured-badge badge-primary">Part time</span>
-                                    {% elif job.employment_type == '3' %}
-                                        <span class="badge featured-badge badge-primary">Contract</span>
-                                    {% else %}
-                                        <span style="color: #ffffff;" class="badge featured-badge badge-warning">Internship</span>
-                                    {% endif %}
-                                </p>
-                                
-                            </div>
-                    
-                            
+                            <span class="text-dark mt-3">
+                                {{ category.category }}
+                            </span>
                         </div>
                     </div>
                 {% endfor %}
             </div>
-            {% endif %}
+            <!-- "More" Button -->
+            <div class="text-center mt-4">
+                <a href="{% url 'adminapp:add-category' %}" class="btn btn-primary">More</a>
+            </div>
         </div>
     </section>
     <section>
