@@ -370,20 +370,25 @@ body{margin-top:20px;
 		background-color: #fff;
 		background-clip: border-box;
 		border: 1px solid rgba(30,46,80,.09);
-		border-radius: 0.25rem;
+		border-radius: 0.5rem;
+		transition: transform 0.3s ease-in-out;
 	}
-	
+
+	.card:hover{
+		transform: scale(1.10);
+	}
+
 	.icon-circle-lg {
-		width: 4rem;
-		height: 4rem;
+		width: 5rem;
+		height: 5rem;
 	}
 	.icon-circle {
 		position: relative;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 3.2rem;
-		height: 3.2rem;
+		width: 3.5rem;
+		height: 3.5rem;
 		border-radius: 50%;
 	}
 	.bg-pastel-primary {
@@ -466,3 +471,279 @@ body{margin-top:20px;
 		border: 1px solid #dee2e6;
 		border-radius: 0.25rem;
 	}
+
+
+/* ------Testimonial-------------- */
+.gradient-custom {
+	background: radial-gradient(50% 123.47% at 50% 50%, #c52c06 0%, #2c0072 100%),
+	  linear-gradient(121.28deg, #669600 0%, #ff0000 100%),
+	  linear-gradient(360deg, #0029ff 0%, #1b096e 100%),
+	  radial-gradient(100% 164.72% at 100% 100%, #6100ff 0%, #6959c4 100%),
+	  radial-gradient(100% 148.07% at 0% 0%, #5f0775 0%, #51d500 100%);
+	background-blend-mode: screen, color-dodge, overlay, difference, normal;
+  }
+  .carousel-indicators {
+	border-radius: 50%;
+	width: 10px;
+	height: 10px;
+  }
+/* --------------------------------------- */
+
+.blog-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+
+.blog-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.blog-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.blog-card-link:hover {
+    text-decoration: none; /* Ensures no underline on hover */
+    color: inherit; /* Keeps text color unchanged */
+}
+
+.blog-card {
+    background: #fff;
+    /* border-radius: 10px; */
+    width: 300px;       /* Fixed width */
+    height: 500px;      /* Fixed height */
+    overflow: hidden;   /* Hide overflow if content is larger */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+	transition: transform 0.3s ease-in-out;
+}
+
+.blog-card img {
+    width: 100%;
+    height: 180px;      /* Keep consistent with card height */
+    object-fit: cover;
+    /* border-radius: 8px; */
+    display: block;
+	transition: transform 0.3s ease-in-out;
+}
+
+
+.blog-card:hover {
+    transform: scale(1.05); /* Slightly enlarges the card */
+}
+
+.blog-card:hover img {
+    transform: scale(1.1); /* Zooms in the image inside */
+}
+
+.blog-meta {
+    font-size: 14px;
+    color: #777;
+    margin: 10px 0;
+}
+
+.blog-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.blog-desc {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Remove underline globally (optional) */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* -------------------------------- */
+/* Section styling */
+.features {
+    width: 100%;
+    padding: 50px 0;
+    background: linear-gradient(to right, #425dd4, #f84e0a); /* Gradient background */
+    color: white;
+    text-align: center;
+}
+
+/* Container */
+.feature-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Feature Box */
+.feature {
+    width: 22%;
+    padding: 20px;
+}
+
+.feature i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.feature h3 {
+	color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.feature p {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .feature-container {
+        flex-direction: column;
+    }
+    
+    .feature {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+}
+
+/* -------------------------- */
+
+
+
+
+/* Login Box Styling */
+.box {
+    background: linear-gradient(to right,rgb(27, 49, 177), #222b3b);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px; 
+    width: 90%;   
+	height: 600px;
+    margin: auto;      /* Center it horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Heading Styling */
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Input Fields */
+.form-control {
+    width: 100%;  /* Ensure input fields don't overflow */
+    max-width: 500px; /* Limit max width */
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+	
+}
+
+.btnlogin {
+    color: white;               
+    background-color: transparent; 
+    border: 2px solid white;    
+    padding: 8px 16px;         /* Reduce padding */
+    border-radius: 20px;        /* Less rounded corners */
+    font-size: 14px;            /* Slightly smaller font */
+    transition: all 0.3s ease;  
+}
+
+.btnlogin:hover {
+    background-color: white;    
+    color: black;               
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.3); /* Subtle hover shadow */
+}
+
+/* -------------------recruiter add profile----------------------- */
+/* Global Form Styles */
+.job-add-form {
+    background: #f8f9fa; /* Light background */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.job-add-form:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+button.btn {
+    background: #007bff; 
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 30px;
+    transition: background 0.3s ease-in-out;
+}
+
+button.btn:hover {
+    background: #0056b3;
+    color: #fff;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border-left: 5px solid #dc3545;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 30px 0;
+}
+
+/* -------------------------------------------- */

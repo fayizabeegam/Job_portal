@@ -96,10 +96,8 @@ class LoginView(FormView):
     def form_valid(self, form):
         user = form.get_user()
         auth.login(self.request, form.get_user())
-        if user.is_superuser:
-            self.success_url = reverse_lazy('adminapp:admin-home')
-        else:
-            self.success_url = reverse_lazy('jobs:home')
+       
+        self.success_url = reverse_lazy('jobs:home')
 
         return HttpResponseRedirect(self.get_success_url())
     def form_invalid(self, form):

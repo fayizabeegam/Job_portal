@@ -2240,7 +2240,7 @@ select.form-control-lg:not([size]):not([multiple]) {
 }
 
 .form-group {
-    margin-bottom: 1rem
+    margin-bottom: 1.5rem
 }
 
 .form-text {
@@ -3394,18 +3394,17 @@ input[type=submit].btn-block {
     left: 0;
     z-index: 1000;
     display: none;
-    float: left;
     min-width: 10rem;
     padding: .5rem 0;
     margin: .125rem 0 0;
     font-size: 1rem;
     color: #212529;
-    text-align: left;
+    text-align: center;
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
-    border-radius: .25rem
+    border-radius: .25rem;
 }
 
 .dropdown-menu-right {
@@ -3537,7 +3536,7 @@ input[type=submit].btn-block {
 
 .dropdown-item:focus,
 .dropdown-item:hover {
-    color: #16181b;
+    color:rgb(22, 23, 27);
     text-decoration: none;
     background-color: #f8f9fa
 }
@@ -4272,7 +4271,7 @@ input[type=submit].btn-block {
 }
 
 .nav-tabs .dropdown-menu {
-    margin-top: -1px;
+    margin-top: 2px;
     border-top-left-radius: 0;
     border-top-right-radius: 0
 }
@@ -4319,9 +4318,10 @@ input[type=submit].btn-block {
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: .5rem 1rem
+    margin:0;
+    padding:0;
+    
 }
-
 .navbar>.container,
 .navbar>.container-fluid {
     display: -ms-flexbox;
@@ -4489,9 +4489,11 @@ input[type=submit].btn-block {
 
     .navbar-expand-md .navbar-nav .nav-link {
         padding-right: .5rem;
-        padding-left: .5rem
+        padding-left: .5rem;
+        padding: 10px 20px; 
+        
     }
-
+    
     .navbar-expand-md>.container,
     .navbar-expand-md>.container-fluid {
         -ms-flex-wrap: nowrap;

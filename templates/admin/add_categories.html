@@ -9,18 +9,10 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-                <h2 class="mb-4 display-5 text-center">Job Categories</h2>
-                <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+                <h2 class="mb-5 display-5 text-center text-dark">Job Categories</h2>
             </div>
         </div>
-        {% if request.user.is_superuser %}
-        <div class="text-center mb-4">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                Add Category
-            </button>
-        </div>
-        {% endif %}
-
+    
         <div class="container overflow-hidden d-flex flex-column align-items-center text-center">
             <div class="row gy-5 gx-md-5 justify-content-center">
                 {% for category in categories %}
@@ -98,6 +90,13 @@
                 {% endfor %}
             </div>
         </div>
+        {% if request.user.is_superuser %}
+        <div class="text-center mt-3 mb-5">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                Add Category
+            </button>
+        </div>
+        {% endif %}
     </div>
 </section>
 

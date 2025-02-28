@@ -67,7 +67,7 @@ section.section-divider .btn {
     width: 100px;
     height: 2px;
     margin: 20px auto 20px;
-    background: #ff7473
+    
 }
 
 .img-responsive {
@@ -117,9 +117,6 @@ button i.fa {
     color: #ff7473
 }
 
-.text-uppercase {
-    text-transform: uppercase
-}
 
 .list-style-none {
     list-style: none
@@ -156,7 +153,7 @@ button i.fa {
 
 .breadcrumb li,
 .breadcrumb a {
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1rem;
     font-weight: 300;
     font-size: 0.75rem;
@@ -172,7 +169,7 @@ textarea.form-control {
 }
 
 .btn-outline-light:hover {
-    color: #ff7473 !important
+    color: #162ae2 !important
 }
 
 .btn-outline-light:focus {
@@ -180,7 +177,7 @@ textarea.form-control {
 }
 
 .badge {
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: 300;
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
     font-size: 0.65rem;
@@ -210,7 +207,7 @@ textarea.form-control {
 #accordion .card .card-header h5 {
     color: #fff;
     font-weight: 300;
-    text-transform: uppercase
+    text-transform: lowercase
 }
 
 #accordion .card .card-header button {
@@ -302,7 +299,7 @@ strong {
 }
 
 .bootstrap-select .dropdown-menu a:hover {
-    background: #ff7473;
+    background:rgb(23, 51, 175);
     color: #fff
 }
 
@@ -347,7 +344,6 @@ strong {
 }
 
 .navbar {
-    text-transform: uppercase;
     letter-spacing: 0.1em;
     background: #f8f9fa;
     padding-top: 0 !important;
@@ -358,6 +354,30 @@ strong {
     font-family: "Montserrat", Helvetica, Arial, sans-serif
 }
 
+
+.navbar ul.navbar-nav>li>a.navbar-btn {
+    border: 2px solid rgb(18, 43, 153); /* Blue Border */
+    background: white;                 /* White Background */
+    color: rgb(18, 43, 153);           /* Blue Text */
+    padding: 10px 25px;                /* Padding */
+    border-radius: 50px;               /* Rounded Button */
+    font-weight: 600;                  /* Bold Text */
+    text-align: center;
+    display: inline-block;
+    transition: all 0.3s ease;         /* Smooth Transition */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); /* Shadow Effect */
+    text-decoration: none;             /* Remove Underline */
+}
+
+.navbar ul.navbar-nav>li>a.navbar-btn:hover{
+    background: rgb(18, 43, 153);     /* Blue Background on Hover */
+    color: white;                    /* White Text on Hover */
+    border: 2px solid rgb(18, 43, 153);
+    text-decoration: none; 
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.4); /* Increase Shadow on Hover */
+}
+
+
 .navbar ul.navbar-nav>li>a:not(.navbar-btn) {
     color: #fff;
     font-weight: 300;
@@ -366,8 +386,28 @@ strong {
 }
 
 .navbar ul.navbar-nav>li>a:not(.navbar-btn):hover {
-    border-top-color: #ff7473;
-    color: #ff7473
+    border-top-color:rgb(16, 35, 146);;
+    color:rgb(14, 41, 160)
+}
+
+@media (max-width: 768px) {
+    .navbar ul.navbar-nav {
+        display: flex;           /* Arrange items in a row */
+        justify-content: center; /* Center items */
+        gap: 15px;              /* Space between buttons */
+        flex-wrap: nowrap;       /* Prevent wrapping */
+    }
+
+    .navbar ul.navbar-nav>li {
+        margin: 0;              /* Remove margin from li */
+        display: inline-block;   /* Align buttons inline */
+    }
+
+    .navbar ul.navbar-nav>li>a.navbar-btn {
+        margin: 0;              /* Remove extra margin */
+        width: auto;            /* Allow natural width */
+        text-align: center;      /* Center text */
+    }
 }
 
 @media (min-width: 992px) {
@@ -379,15 +419,15 @@ strong {
     }
 
     .navbar ul.navbar-nav>li>a:not(.navbar-btn):hover {
-        border-top-color: #ff7473;
-        color: #ff7473
+        border-top-color:rgb(16, 35, 146);;
+        color:rgb(14, 41, 160)
     }
 
     .navbar ul.navbar-nav>li.active>a,
     .navbar ul.navbar-nav>li.show>a {
         text-decoration: none !important;
-        border-top-color: #ff7473;
-        color: #ff7473
+        border-top-color:rgb(16, 35, 146);
+        color:rgb(14, 41, 160)
     }
 
     .navbar ul.navbar-nav>li>a.navbar-btn {
@@ -398,7 +438,6 @@ strong {
 }
 
 .navbar .navbar-toggler {
-    text-transform: uppercase;
     letter-spacing: 0.1em;
     color: #fff;
     font-size: 0.8rem;
@@ -427,7 +466,7 @@ ul.dropdown-menu li a:hover {
 }
 
 #login-modal .modal-header h4 {
-    text-transform: uppercase
+    text-transform: lowercase
 }
 
 #login-modal a {
@@ -493,6 +532,7 @@ ul.dropdown-menu li a:hover {
     -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
     border-color: #ddd
+    margin-bottom:10px;
 }
 
 .dropdown-menu .dropdown-item:focus,
@@ -520,22 +560,21 @@ ul.dropdown-menu li a:hover {
 }
 
 .footer__block {
-    background: #43399f;
+    background: #fff;
     padding: 80px 0
 }
 
 .footer__block h4 {
-    border-top: solid 1px #fff;
-    border-bottom: solid 1px #fff;
+    border-top: solid 1px #050101;
+    border-bottom: solid 1px #050101;
     padding: 15px 0;
     margin-bottom: 30px;
-    color: #fff;
-    text-transform: uppercase;
+    color: #050101;
     letter-spacing: 0.08rem
 }
 
 .footer__block h5 {
-    color: #fff
+    color: #050101
 }
 
 .footer__block ul li {
@@ -543,7 +582,7 @@ ul.dropdown-menu li a:hover {
 }
 
 .footer__block ul a {
-    color: #fff;
+    color: #050101;
     margin-bottom: 2px;
     font-size: 0.9rem
 }
@@ -554,7 +593,7 @@ ul.dropdown-menu li a:hover {
 }
 
 .footer__block p {
-    color: #fff;
+    color: #050101;
     font-size: 0.9rem
 }
 
@@ -563,67 +602,67 @@ ul.dropdown-menu li a:hover {
 }
 
 .footer__block p.social {
-    text-align: left
+    text-align: left;
 }
 
 .footer__block .social {
-    margin-bottom: 2rem
+    margin-bottom: 2rem;
 }
 
+/* Common Styling for Social Icons */
 .footer__block .social a {
     margin: 0 10px 0 0;
-    color: #fff;
+    color: #fff; /* White icon */
     display: inline-block;
-    width: 26px;
-    height: 26px;
-    border-radius: 13px;
-    line-height: 26px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    line-height: 36px;
     font-size: 15px;
     text-align: center;
-    -webkit-transition: all .2s ease-out;
-    transition: all .2s ease-out;
-    vertical-align: bottom
+    transition: all 0.2s ease-out;
+    vertical-align: bottom;
 }
 
 .footer__block .social a i {
-    vertical-align: bottom;
-    line-height: 26px
+    color: #fff;  
+    vertical-align: middle;
 }
 
+/* Social Media Colors */
 .footer__block .social a.facebook {
-    background-color: #6051e8
-}
-
-.footer__block .social a.gplus {
-    background-color: #c21f25
+    background-color: #1877F2; /* Facebook Blue */
 }
 
 .footer__block .social a.twitter {
-    background-color: #3cf
+    background-color: #1DA1F2; /* Twitter Blue */
+}
+
+.footer__block .social a.google {
+    background-color: #DB4437; /* Google Red */
 }
 
 .footer__block .social a.instagram {
-    background-color: #cd4378
+    background-color: #C13584; /* Instagram Pink */
+}
+
+.footer__block .social a.linkedin {
+    background-color: #0077B5; /* LinkedIn Blue */
+}
+
+.footer__block .social a.github {
+    background-color: #333; /* GitHub Black */
 }
 
 .footer__block .social a.email {
-    background-color: #4a7f45
+    background-color: #4a7f45; /* Green Email */
 }
 
-.footer__copyright {
-    background: #34314c;
-    color: #ccc;
-    padding: 20px 0;
-    font-size: .7875rem;
-    line-height: 28px;
-    font-family: "Montserrat", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 0.1em
+/* Hover Effects */
+.footer__block .social a:hover {
+    opacity: 0.8;
 }
 
-.footer__copyright p {
-    margin: 0
-}
 
 .team-member {
     text-align: center;
@@ -631,7 +670,7 @@ ul.dropdown-menu li a:hover {
 }
 
 .team-member h3 {
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1em;
     margin-top: 20px;
     margin-bottom: 5px;
@@ -641,7 +680,7 @@ ul.dropdown-menu li a:hover {
 .team-member p.role {
     color: #adb5bd;
     font-size: .7875rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1em
 }
 
@@ -748,7 +787,7 @@ ul.dropdown-menu li a:hover {
 
 .author-date-top {
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1em;
     color: #adb5bd;
     font-size: .7875rem;
@@ -776,7 +815,7 @@ ul.dropdown-menu li a:hover {
 
 .post .author-category {
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1em;
     color: #adb5bd;
     font-size: .7875rem;
@@ -794,7 +833,7 @@ ul.dropdown-menu li a:hover {
 
 .post .date-comments {
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1em;
     color: #adb5bd;
     font-size: .7875rem;
@@ -1009,7 +1048,7 @@ ul.dropdown-menu li a:hover {
 
 .testimonials .item .testimonial .name-picture h5 {
     font-size: .875rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.08em
 }
 
@@ -1096,7 +1135,7 @@ ul.dropdown-menu li a:hover {
 
 .box-simple h3 {
     font-weight: normal;
-    text-transform: uppercase;
+    text-transform: lowercase;
     line-height: 1.5;
     color: #adb5bd;
     font-weight: 800;
@@ -1189,7 +1228,7 @@ ul.dropdown-menu li a:hover {
 
 .box-image .name h3 {
     color: #fff;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.08em
 }
 
@@ -1274,7 +1313,7 @@ ul.dropdown-menu li a:hover {
 
 .box-image-text .top .name h3 {
     color: #fff;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.08em
 }
 
@@ -1285,7 +1324,7 @@ ul.dropdown-menu li a:hover {
 
 .box-image-text .top .name h4 {
     color: #fff;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.08em
 }
 
@@ -1313,7 +1352,7 @@ ul.dropdown-menu li a:hover {
 
 .box-image-text .content h3,
 .box-image-text .content h4 {
-    text-transform: uppercase;
+    text-transform: lowercase;
     line-height: 1.5;
     color: #adb5bd;
     font-weight: 800;
@@ -1360,7 +1399,7 @@ ul.dropdown-menu li a:hover {
     margin: -20px 0 20px;
     padding: 20px;
     border-bottom: solid 1px #dee2e6;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.08em
 }
 
@@ -1380,7 +1419,7 @@ ul.dropdown-menu li a:hover {
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
     font-weight: 300;
     font-size: 0.75rem !important;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.12rem;
     color: #aaa
 }
@@ -1398,17 +1437,32 @@ ul.dropdown-menu li a:hover {
 }
 
 .job-form-section {
-    padding: 80px 0;
-    background: #2417d1; 
-    min-height: 90vh;
+    padding: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../img/logo2.jpg') center/cover no-repeat; /* Add your background image */
+    min-height: 100vh;
+    position: relative; 
+    
+
+}
+.job-form-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(190, 179, 179, 0.5); /* Adjust overlay color and opacity */
+    z-index: -1;
 }
 
 .job-form-section .job-main-form {
-    margin-bottom: 40px
+    margin-bottom: 10px
 }
 
 .job-form-section .job-main-form label {
-    text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-left: 10px
 }
@@ -1421,13 +1475,64 @@ ul.dropdown-menu li a:hover {
     margin-bottom: 0
 }
 
-
-.job-main-form__button {
-    margin-top: 15px;
-    display: block;
-    width: 100%
+.job-form-box {
+    padding: 40px 20px;  /* Add padding */
+    max-width: 600px; /* Set a max width */
+    text-align: center;
+    background: rgba(38, 37, 92, 0.9); /* Ensure it has a visible background */
+    border-radius: 10px;
+    box-shadow: 0px 4px 9px rgba(51, 45, 45, 0.2);
+    position: relative;
+    z-index: 2;
 }
 
+/* Ensure inputs and button are in the same line */
+.job-main-form .row {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 10px; /* Add spacing between inputs and button */
+}
+
+/* Style inputs to have the same height and look */
+.form-group input {
+    border-radius: 30px; /* Make inputs oval */
+    border: 1px solid #ccc;
+    padding: 12px 20px;
+    font-size: 16px;
+    width: 100%;
+    height: 50px; /* Ensure consistent height */
+}
+
+/* Ensure button matches input height */
+.job-main-form__button {
+    border-radius: 30px; /* Make button oval */
+    background-color: #fff;
+    color: rgb(12, 26, 90);
+    font-size: 18px;
+    padding: 12px 25px;
+    border: none;
+    height: 50px; /* Ensure consistent height with inputs */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+}
+.job-main-form__button:hover{
+    color: rgb(222, 224, 236);
+    background-color: rgba(13, 30, 107, 0.1);
+    outline: 2px solid rgb(213, 217, 235); /* Add an outline */
+    outline-offset: 2px; /* Space between outline and button */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Adjust button container alignment */
+.col-md-4.text-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .job-listing {
     border: solid 1px #dee2e6;
@@ -1484,7 +1589,7 @@ ul.dropdown-menu li a:hover {
 .featured__details {
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
     font-size: .7875rem;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1em
 }
 
@@ -1496,7 +1601,7 @@ ul.dropdown-menu li a:hover {
 
 .job-detail-description {
     text-align: center;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.1em;
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
     color: #868e96;
@@ -1546,6 +1651,36 @@ ul.dropdown-menu li a:hover {
     color: #4460ae;
     border-color: #4460ae
 }
+
+@media (max-width: 768px) {
+    .job-form-box {
+        padding: 20px 10px; /* Reduce padding */
+        max-width: 100%; /* Allow full width on small screens */
+        border-radius: 10px; /* Keep rounded corners */
+        box-shadow: 0px 2px 6px rgba(51, 45, 45, 0.2); /* Lighter shadow for small screens */
+        text-align: center;
+    }
+
+    .job-main-form .row {
+        flex-direction: column; /* Stack inputs and button vertically */
+        gap: 15px; /* Add vertical spacing */
+    }
+
+    .form-group input {
+        width: 100%; /* Full width for inputs */
+        height: 45px; /* Slightly smaller height */
+        padding: 10px 15px; /* Adjust padding */
+        font-size: 14px; /* Smaller font size */
+    }
+
+    .job-main-form__button {
+        width: 100%; /* Full width for button */
+        height: 45px; /* Match input height */
+        padding: 10px; /* Adjust padding */
+        font-size: 16px; /* Smaller font size */
+    }
+}
+
 
 @media (max-width: 991px) {
     .job-listing {
@@ -1628,7 +1763,7 @@ ul.dropdown-menu li a:hover {
 
 .packages .package .package-header h5 {
     color: #fff;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: bold;
     line-height: 57px;
     margin: 0;
@@ -1703,7 +1838,7 @@ ul.dropdown-menu li a:hover {
 .packages .package.best-value .package-header h5 {
     font-weight: bold;
     line-height: 29px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 0.08em
 }
 
@@ -1843,17 +1978,14 @@ ul.dropdown-menu li a:hover {
 .btn {
     font-weight: 700;
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
-    border: 1px solid transparent;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    padding: .375rem .75rem;
-    font-size: .875rem;
+    border: 2px solid transparent;
+    border-radius: 50px; /* Ensures oval shape */
+    letter-spacing: 0.1em;
+    padding: 10px 20px;
+    font-size: 0.875rem;
     line-height: 1.5;
-    border-radius: 0;
-    -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
 }
 
 .btn:focus,
@@ -1874,37 +2006,37 @@ ul.dropdown-menu li a:hover {
 }
 
 .btn-primary {
-    color: color-yiq(#ff7473);
-    background-color: #ff7473;
-    border-color: #ff7473
+    color:#09106e;
+    /* background-color: #09106e; */
+    border-color: #09106e
 }
 
 .btn-primary:hover {
-    color: color-yiq(#ff4e4d);
-    background-color: #ff4e4d;
-    border-color: #ff4140
+    color: color-yiq(#09106e);
+    background-color: #09106e;
+    border-color: #09106e
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
-    -webkit-box-shadow: 0 0 0 .2rem rgba(255, 116, 115, 0.5);
-    box-shadow: 0 0 0 .2rem rgba(255, 116, 115, 0.5)
+    -webkit-box-shadow: 0 0 0 .2rem rgba(11, 9, 97, 0.5);
+    box-shadow: 0 0 0 .2rem rgba(11, 9, 97, 0.5)
 }
 
 .btn-primary.disabled,
 .btn-primary:disabled {
-    background-color: #ff7473;
-    border-color: #ff7473
+    background-color: #09106e;
+    border-color: #09106e
 }
 
 .btn-primary:not([disabled]):not(.disabled):active,
 .btn-primary:not([disabled]):not(.disabled).active,
 .show>.btn-primary.dropdown-toggle {
-    color: color-yiq(#ff4140);
-    background-color: #ff4140;
-    border-color: #ff3533;
-    -webkit-box-shadow: 0 0 0 .2rem rgba(255, 116, 115, 0.5);
-    box-shadow: 0 0 0 .2rem rgba(255, 116, 115, 0.5)
+    color: color-yiq(#09106e);
+    background-color: #09106e;
+    border-color: #09106e;
+    -webkit-box-shadow: 0 0 0 .2rem rgba(11, 9, 97, 0.5);
+    box-shadow: 0 0 0 .2rem rgba(11, 9, 97, 0.5)
 }
 
 .btn-secondary {
@@ -2079,14 +2211,14 @@ ul.dropdown-menu li a:hover {
 
 .btn-light {
     color: color-yiq(#fafafa);
-    background-color: #fafafa;
+    /* background-color: #fafafa; */
     border-color: #fafafa
 }
 
 .btn-light:hover {
-    color: color-yiq(#e7e7e7);
-    background-color: #e7e7e7;
-    border-color: #e1e1e1
+    color: color-yiq(#0b1469);
+    background-color: #0b1469;
+    border-color: #0b1469
 }
 
 .btn-light:focus,
@@ -2760,7 +2892,6 @@ h6,
     font-weight: 700;
     line-height: 1.2;
     color: #555;
-    text-transform: uppercase;
     letter-spacing: 0.1em
 }
 
@@ -2778,6 +2909,7 @@ h3,
 .h3 {
     font-size: 1.4875rem
 }
+
 
 h4,
 .h4,

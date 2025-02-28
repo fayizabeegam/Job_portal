@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-
     <div id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
          class="modal fade" >
         <div role="document" class="modal-dialog" >
@@ -38,56 +37,47 @@
         </div>
     </div>
     <!-- *** LOGIN MODAL END ***-->
-    <section class="job-form-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Left: Search Form -->
-            <div class="col-lg-8">
-                <h1 class="section-title">Discover Your Next Opportunity</h1>
-                <p class="section-subtitle">Search for jobs that match your skills and preferences</p>
-                <div class="job-form-box">
-                    <h2 class="heading">Find a <span class="accent">job</span> you will
-                        <span class="accent">love</span>.
-                    </h2>
-                    <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
-                        <div class="controls">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="profession">Position</label>
-                                        <input type="text" id="profession" name="position"
-                                               placeholder="Position" class="form-control">
+    <section class="job-form-section d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center justify-content-center ">
+                <!-- Left: Search Form -->
+                <div class="col-lg-8 ">
+                    <div class="job-form-box mx-auto text-center ">
+                        <h2 class="heading text-light">Find the most exciting jobs
+                        </h2>
+                        <form id="job-main-form" method="get" action="{% url 'jobs:searh' %}" class="job-main-form">
+                            <div class="controls">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" id="profession" name="position"
+                                                placeholder="Position" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="location">Location</label>
-                                        <input type="text" id="location" name="location"
-                                               placeholder="Location" class="form-control">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input type="text" id="location" name="location"
+                                                placeholder="Location" class="form-control">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-outline-white-primary job-main-form__button">
-                                        <i class="fa fa-search"></i> Search
-                                    </button>
+                                    <div class="col-md-4 text-center">
+                                        <button type="submit" class="job-main-form__button">
+                                            <i class="fa fa-search"></i> Search
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <!-- Right: Image -->
-            <div class="col-lg-4 text-center">
-                <img src="{% static 'img/manlap1.png' %}" alt="Job Search" class="img-fluid">
-            </div>
         </div>
-    </div>
-    </section>
+   
+    </section> 
 
-    <section class="bg-light-gray">
+    <section class="bg-light-gray" id="categories-section">
         <div class="container">
-            <h3 class="heading">Job Categories</h3>
+            <h3 class="heading">Browse Top Categories</h3>
             <div class="row featured align-items-stretch">
                 {% for category in categories %}
                     <div class="col-md-3 mb-4">
@@ -108,13 +98,37 @@
             </div>
             <!-- "More" Button -->
             <div class="text-center mt-4">
-                <a href="{% url 'adminapp:add-category' %}" class="btn btn-primary">More</a>
+                <a href="{% url 'adminapp:add-category' %}" class="btn btn-primary text-decoration-none">Browse All Categories</a>
+            </div>
+        </div>
+    </section>
+    <section class="features">
+        <div class="feature-container">
+            <div class="feature">
+                <i class="fas fa-file-alt"></i> <!-- Icon -->
+                <h3>Search Millions of Jobs</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-users-cog"></i> <!-- Icon -->
+                <h3>Easy To Manage Jobs</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-briefcase"></i> <!-- Icon -->
+                <h3>Top Careers</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-user-tie"></i> <!-- Icon -->
+                <h3>Search Expert Candidates</h3>
+                <p>A small river named Duden flows by their place and supplies.</p>
             </div>
         </div>
     </section>
     <section>
         <div class="container">
-            <h4 class="heading">Trending this month</h4>
+            <h3 class="heading">Trending this month</h3>
             {% for trending in trendings %}
                 <div class="job-listing  job-listing--last">
                     <div class="row">
@@ -153,16 +167,149 @@
             {% endfor %}
         </div>
     </section>
-    <section style="background-image: url('{% static 'img/support-img.jpg' %}');" class="section-divider">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Start searching for your new job now! </p>
-                    <p><a href="{% url 'jobs:jobs' %}" class="btn btn-outline-light">See available jobs </a></p>
+    <section class="gradient-custom">
+        <div class="container my-5 py-5">
+            <div class="row d-flex justify-content-center">
+            <div class="col-md-12">
+                <div class="text-center mb-4 pb-2">
+                <i class="fas fa-quote-left fa-3x text-white"></i>
                 </div>
+
+                <div class="card">
+                <div class="card-body px-4 py-5">
+                    <!-- Carousel wrapper -->
+                    <div id="carouselDarkVariant" data-mdb-carousel-init class="carousel slide carousel-dark" data-mdb-ride="carousel">
+                    <!-- Indicators -->
+                    <div class="carousel-indicators mb-0">
+                        <button data-mdb-button-init data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                        <button data-mdb-button-init data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="1"
+                        aria-label="Slide 1"></button>
+                        <button data-mdb-button-init data-mdb-target="#carouselDarkVariant" data-mdb-slide-to="2"
+                        aria-label="Slide 1"></button>
+                    </div>
+
+                    <!-- Inner -->
+                    <div class="carousel-inner pb-5">
+                        <!-- Single item -->
+                        <div class="carousel-item active">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-10 col-xl-8">
+                            <div class="row">
+                                <div class="col-lg-4 d-flex justify-content-center">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+                                    class="rounded-circle shadow-1 mb-4 mb-lg-0" alt="woman avatar" width="150"
+                                    height="150" />
+                                </div>
+                                <div
+                                class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+                                <h4 class="mb-4">Maria Smantha - Web Developer</h4>
+                                <p class="mb-0 pb-3">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A
+                                    aliquam amet animi blanditiis consequatur debitis dicta
+                                    distinctio, enim error eum iste libero modi nam natus
+                                    perferendis possimus quasi sint sit tempora voluptatem. Est,
+                                    exercitationem id ipsa ipsum laboriosam perferendis.
+                                </p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Single item -->
+                        <div class="carousel-item">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-10 col-xl-8">
+                            <div class="row">
+                                <div class="col-lg-4 d-flex justify-content-center">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+                                    class="rounded-circle shadow-1 mb-4 mb-lg-0" alt="woman avatar" width="150"
+                                    height="150" />
+                                </div>
+                                <div
+                                class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+                                <h4 class="mb-4">Lisa Cudrow - Graphic Designer</h4>
+                                <p class="mb-0 pb-3">
+                                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                    accusantium doloremque laudantium, totam rem aperiam, eaque
+                                    ipsa quae ab illo inventore veritatis et quasi architecto
+                                    beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+                                    quia voluptas sit aspernatur.
+                                </p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Single item -->
+                        <div class="carousel-item">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-10 col-xl-8">
+                            <div class="row">
+                                <div class="col-lg-4 d-flex justify-content-center">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
+                                    class="rounded-circle shadow-1 mb-4 mb-lg-0" alt="woman avatar" width="150"
+                                    height="150" />
+                                </div>
+                                <div
+                                class="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+                                <h4 class="mb-4">John Smith - Marketing Specialist</h4>
+                                <p class="mb-0 pb-3">
+                                    At vero eos et accusamus et iusto odio dignissimos qui
+                                    blanditiis praesentium voluptatum deleniti atque corrupti quos
+                                    dolores et quas molestias excepturi sint occaecati cupiditate
+                                    non provident, similique sunt in culpa qui officia mollitia
+                                    animi id laborum et dolorum fuga.
+                                </p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Inner -->
+
+                    <!-- Controls -->
+                    <button data-mdb-button-init class="carousel-control-prev" type="button" data-mdb-target="#carouselDarkVariant"
+                        data-mdb-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button data-mdb-button-init class="carousel-control-next" type="button" data-mdb-target="#carouselDarkVariant"
+                        data-mdb-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    </div>
+                    <!-- Carousel wrapper -->
+                </div>
+                </div>
+
+                <div class="text-center mt-4 pt-2">
+                <i class="fas fa-quote-right fa-3x text-white"></i>
+                </div>
+            </div>
             </div>
         </div>
     </section>
+    <section class="blog-section ">
+        <h3 class="heading">Latest Blogs</h3>
+        <div class="blog-container">
+            {% for blog in blogs %}
+            <a href="{{ blog.link }}" class="blog-card-link text" target="_blank">
+                <div class="blog-card">
+                    <img src="{{ blog.image }}" alt="Blog Image">
+                    <p class="blog-meta">By Naukri</p>
+                    <h3 class="blog-heading">{{ blog.title }}</h3>
+                    <p class="blog-desc">{{ blog.desc }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    
 
 {% endblock %}

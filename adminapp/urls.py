@@ -11,7 +11,7 @@ app_name = "adminapp"
 
 urlpatterns = [
 
-    path('admin-home/', AdminHomeView.as_view(), name='admin-home'),
+    # path('admin-home/', AdminHomeView.as_view(), name='admin-home'),
 
     path('add-categories/', AddCategories.as_view(), name='add-category'),
     path('edit-category/<int:pk>/', views.EditCategory.as_view(), name='edit-category'), 

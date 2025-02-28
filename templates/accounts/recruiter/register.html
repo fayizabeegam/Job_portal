@@ -4,11 +4,10 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="col-lg-6 offset-3">
-        <div class="box">
-            <h3 class="heading">New account</h3>
-            <p class="lead">Not registered yet?</p>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-lg-6 col-md-6 col-sm-8">
+        <div class="box p-4 shadow-lg rounded">
+            <h3 class="heading text-light">Create account</h3>
             {% if form.errors %}
                 {% for field in form %}
                     {% for error in field.errors %}
@@ -28,8 +27,7 @@
             <form action="" method="post">
                 {% csrf_token %}
                 {% for field in form %}
-                <div class="form-group">
-                    <label for="id_{{ field.name }}">{{ field.label }}</label>
+                <div class="form-group mb-4 mt-4">
                     <input type="{{ field.field.widget.input_type }}"
                            class="form-control"
                            name="{{ field.name }}"
@@ -37,12 +35,17 @@
                            placeholder="{{ field.field.widget.attrs.placeholder }}">
                 </div>  
                 {% endfor %}
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-user-md"></i> Register
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btnlogin"><i class="fa fa-user-md"></i> Register
                     </button>
+                </div>
+                <div class="text-center mt-2">
+                    <p class=" text-light">already registerd?
+                        <a href="{% url 'accounts:login' %}" class="text-light text-decoration-none">Login</a> 
+                    </p>
                 </div>
             </form>
         </div>
     </div>
-
+</div>
 {% endblock %}

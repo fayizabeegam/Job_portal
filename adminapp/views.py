@@ -1,3 +1,4 @@
+import requests
 from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse_lazy
 from django.db.models import F
@@ -13,14 +14,14 @@ from .forms import *
 from django.contrib import messages
 
 
-class AdminHomeView(View):
-    template_name = 'admin/admin_home.html'  
+# class AdminHomeView(View):
+#     template_name = 'home.html'  
 
-    def get(self, request, *args, **kwargs):
-        context = {
-            'title': 'Admin Home',
-        }
-        return render(request, self.template_name, context)
+#     def get(self, request, *args, **kwargs):
+#         context = {
+#             'title': 'Admin Home',
+#         }
+#         return render(request, self.template_name, context)
 
 
 def is_admin(user):

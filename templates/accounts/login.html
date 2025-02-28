@@ -5,10 +5,10 @@
 
 {% block content %}
 
-    <div class="col-lg-6 offset-3">
-        <div class="box">
-            <h3 class="heading">Login</h3>
-            <p class="lead">Already have account?</p>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+        <div class="box p-5 shadow-lg rounded">
+            <h3 class="heading text-center text-light ">Login</h3>
             {% if form.errors %}
                 {% for field in form %}
                     {% for error in field.errors %}
@@ -25,11 +25,11 @@
                     </div>
                 {% endfor %}
             {% endif %}
+
             <form action="" method="post">
                 {% csrf_token %}
                 {% for field in form %}
-                    <div class="form-group">
-                        <label for="id_{{ field.name }}">{{ field.label }}</label>
+                    <div class="form-group mb-4 mt-5">
                         <input type="{{ field.field.widget.input_type }}"
                                class="form-control"
                                name="{{ field.name }}"
@@ -37,11 +37,22 @@
                                placeholder="{{ field.field.widget.attrs.placeholder }}">
                     </div>
                 {% endfor %}
-                <div class="text-center">
-                    <button type="submit" class="btn btn-outline-white-primary"><i class="fa fa-sign-in"></i> Log in
+                <div class="text-center mt-5 ">
+                    <button type="submit" class="btn btnlogin">
+                        <i class="fa fa-sign-in"></i> Log in 
                     </button>
                 </div>
             </form>
+             <!-- Register Link -->
+             <div class="text-center mt-3">
+                <p class="mb-5 mt-5 text-light">Don't have an account?
+                    <a href="{% url 'accounts:jobseeker-register' %}" class="text-light text-decoration-none">Jobseeker</a> | 
+                    <a href="{% url 'accounts:recruiter-register' %}" class="text-light  text-decoration-none">Recruiter</a>
+                </p>
+                
+            </div>
         </div>
     </div>
+</div>
+
 {% endblock %}

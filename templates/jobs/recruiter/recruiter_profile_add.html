@@ -9,20 +9,17 @@
 {% endblock %}
 
 {% block content %}
-
-    <section class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h1 class="heading">Add Profile</h1>
-                </div>
-            </div>
-        </div>
-    </section>
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 mx-auto">
+                <div class="col-lg-8 mx-auto">
+                    <h3 class="heading">Create Your Profile</h3>
+                </div>
+            </div>
+        </div>
+        <div class="container d-flex justify-content-center">
+            <div class="row">
+                <div class="col-lg-12 mx-auto">
                     {% if form.errors %}
                         {% for field in form %}
                             {% for error in field.errors %}
@@ -37,44 +34,37 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <label for="designation">Designation</label>
-                                <input id="designation" name="designation" type="text" class="form-control">
+                                <input id="designation" name="designation" type="text" class="form-control" placeholder="Designation">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <label for="company_name">Company Name</label>
-                                <input id="company_name" name="company_name" type="text" class="form-control">
+                                <input id="company_name" name="company_name" type="text" class="form-control"  placeholder="Company Name">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <label for="company_description">Company Description</label>
-                                <textarea id="company_description" name="company_description" rows="5" class="form-control"></textarea>
+                                <textarea id="company_description" name="company_description" rows="5" class="form-control" placeholder="Company Description"></textarea>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <label for="company_location">Company Location</label>
-                                <input id="company_location" name="company_location" type="text" class="form-control">
+                                <input id="company_location" name="company_location" type="text" class="form-control" placeholder="Company Location">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <label for="industry">Industry </label>
-                                <input id="industry" name="industry" type="text" class="form-control">
+                                <input id="industry" name="industry" type="text" class="form-control" placeholder="Industry">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <label for="established_year">Established Year </label>
-                                <input id="established_year" name="established_year" type="text" class="form-control">
+                                <input id="established_year" name="established_year" type="text" class="form-control" placeholder="Established Year">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <label for="profile_picture">Profile Picture</label>
-                                <input id="profile_picture" name="profile_picture" type="file" class="form-control">
+                                <input id="profile_picture" name="profile_picture" type="file" class="form-control" placeholder="Profile Picture">
                             </div>
                         </div>
                         
