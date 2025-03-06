@@ -718,7 +718,7 @@ textarea.form-control {
 }
 
 button.btn {
-    background: #007bff; 
+    background: #081586; 
     color: white;
     padding: 12px 30px;
     border: none;
@@ -727,8 +727,8 @@ button.btn {
 }
 
 button.btn:hover {
-    background: #0056b3;
-    color: #fff;
+    background: #fff;
+    color: #0b1a70;
 }
 
 .alert-danger {
